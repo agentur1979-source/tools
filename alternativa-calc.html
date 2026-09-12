@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Расчёт альтернативной сделки — Шмидт Капитал</title>
+<style>
+:root{
+  --graphite:#16181a;
+  --graphite-2:#1d2023;
+  --graphite-3:#24282c;
+  --brass:#b08d57;
+  --brass-dim:#7d6540;
+  --red:#c4362f;
+  --ink:#e9e7e3;
+  --muted:#898f95;
+  --line:#2b3035;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;padding:0}
+body{
+  background:var(--graphite);
+  background-image:
+    linear-gradient(rgba(176,141,87,.045) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(176,141,87,.045) 1px,transparent 1px);
+  background-size:28px 28px;
+  color:var(--ink);
+  font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  font-size:16px;
+  line-height:1.5;
+  padding-bottom:132px;
+}
+.wrap{max-width:560px;margin:0 auto;padding:24px 18px 0}
+
+/* header */
+.head{display:flex;gap:13px;align-items:center;padding-bottom:18px;border-bottom:1px solid var(--line)}
+.head svg{flex:0 0 auto}
+.brand{font-size:12.5px;letter-spacing:.14em;color:var(--brass);font-weight:600}
+.brand span{display:block;letter-spacing:0;color:var(--muted);font-weight:400;font-size:12px;margin-top:2px}
+h1{font-size:25px;line-height:1.22;font-weight:600;margin:22px 0 8px;letter-spacing:-.015em}
+.lede{color:var(--muted);font-size:14.5px;margin:0 0 26px;max-width:44ch}
+
+/* sections */
+section{margin-bottom:26px}
+h2{font-size:12.5px;font-weight:600;color:var(--brass);margin:0 0 2px;letter-spacing:.03em}
+.sub{font-size:13px;color:var(--muted);margin:0 0 14px}
+.rule{height:1px;background:var(--line);margin:0 0 14px}
+
+.field{margin-bottom:13px}
+label{display:block;font-size:13.5px;color:var(--muted);margin-bottom:5px}
+.inp{position:relative}
+input[type=text],select{
+  width:100%;background:var(--graphite-2);border:1px solid var(--line);
+  border-radius:7px;color:var(--ink);font:inherit;font-size:16.5px;
+  padding:11px 34px 11px 12px;font-variant-numeric:tabular-nums;
+  appearance:none;-webkit-appearance:none;
+}
+select{padding-right:34px;background-image:none}
+input:focus,select:focus{outline:none;border-color:var(--brass);box-shadow:0 0 0 3px rgba(176,141,87,.15)}
+.cur{position:absolute;right:12px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:14px;pointer-events:none}
+.arrow{position:absolute;right:13px;top:50%;transform:translateY(-50%);color:var(--muted);font-size:11px;pointer-events:none}
+.two{display:flex;gap:11px}
+.two .field{flex:1}
+
+.check{display:flex;gap:10px;align-items:flex-start;margin:2px 0 13px;cursor:pointer}
+.check input{flex:0 0 auto;width:19px;height:19px;margin-top:2px;accent-color:var(--brass)}
+.check span{font-size:13.5px;color:var(--muted);line-height:1.4}
+
+/* result */
+.result{border:1px solid var(--line);border-radius:10px;background:var(--graphite-2);padding:16px 15px;margin-bottom:18px}
+.result h2{margin-bottom:12px}
+.row{display:flex;justify-content:space-between;gap:14px;padding:7px 0;font-size:14.5px;border-bottom:1px solid rgba(43,48,53,.7)}
+.row:last-child{border-bottom:0}
+.row .k{color:var(--muted)}
+.row .v{font-variant-numeric:tabular-nums;white-space:nowrap}
+.row.minus .v{color:#b7726d}
+.row.tot{border-top:1px solid var(--brass-dim);border-bottom:0;margin-top:6px;padding-top:11px;font-size:15.5px}
+.row.tot .k{color:var(--ink)}
+.row.tot .v{font-weight:600}
+.note{font-size:12.5px;color:var(--muted);margin-top:11px;line-height:1.45}
+
+.verdict{border-left:2px solid var(--red);padding:2px 0 2px 13px;margin:16px 0 0}
+.verdict .lab{font-size:13px;color:var(--muted)}
+.verdict .big{font-size:27px;font-weight:600;color:var(--red);font-variant-numeric:tabular-nums;letter-spacing:-.02em;line-height:1.2}
+.verdict .exp{font-size:13px;color:var(--muted);margin-top:5px}
+
+button.act{
+  width:100%;background:transparent;border:1px solid var(--brass-dim);color:var(--brass);
+  font:inherit;font-size:15px;padding:12px;border-radius:7px;cursor:pointer;margin-bottom:10px
+}
+button.act:active{background:rgba(176,141,87,.1)}
+
+/* sticky */
+.bar{
+  position:fixed;left:0;right:0;bottom:0;background:rgba(22,24,26,.96);
+  backdrop-filter:blur(8px);border-top:1px solid var(--brass-dim);
+  padding:11px 18px calc(11px + env(safe-area-inset-bottom));
+}
+.bar .in{max-width:560px;margin:0 auto;display:flex;justify-content:space-between;align-items:baseline;gap:12px}
+.bar .k{font-size:13px;color:var(--muted)}
+.bar .v{font-size:21px;font-weight:600;font-variant-numeric:tabular-nums;white-space:nowrap}
+.bar .v.need{color:var(--red)}
+.bar .v.left{color:var(--brass)}
+
+.foot{text-align:center;color:var(--muted);font-size:12px;padding:8px 0 20px;line-height:1.6}
+.foot b{color:var(--brass);font-weight:600;letter-spacing:.03em}
+@media (prefers-reduced-motion:no-preference){.verdict .big{transition:color .2s}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="head">
+    <svg width="38" height="42" viewBox="0 0 40 44" aria-label="Шмидт Капитал">
+      <path d="M20 2 L36 11 L36 33 L20 42 L4 33 L4 11 Z" fill="none" stroke="#b08d57" stroke-width="2.4"/>
+      <path d="M20 6.4 L32.2 13.3 L32.2 30.7 L20 37.6 L7.8 30.7 L7.8 13.3 Z" fill="none" stroke="#b08d57" stroke-width="1"/>
+      <g fill="#b08d57">
+        <rect x="12" y="14" width="2.8" height="11"/>
+        <rect x="18.6" y="14" width="2.8" height="11"/>
+        <rect x="25.2" y="14" width="2.8" height="11"/>
+        <rect x="12" y="25" width="16" height="2.8"/>
+      </g>
+    </svg>
+    <div class="brand">ШМИДТ КАПИТАЛ<span>Сделки с недвижимостью в Москве</span></div>
+  </div>
+
+  <h1>Продаю одну, покупаю другую. Сколько мне доложить?</h1>
+  <p class="lede">Расчёт альтернативной сделки: что останется после продажи, сколько не хватит на покупку и каким будет платёж, если брать ипотеку на разницу.</p>
+
+  <section>
+    <h2>Продажа</h2>
+    <p class="sub">Квартира, которую вы продаёте</p>
+    <div class="rule"></div>
+
+    <div class="field">
+      <label for="sPrice">Цена продажи</label>
+      <div class="inp"><input type="text" id="sPrice" inputmode="numeric" value="20 000 000"><span class="cur">₽</span></div>
+    </div>
+
+    <div class="field">
+      <label for="sDebt">Остаток ипотеки по этой квартире</label>
+      <div class="inp"><input type="text" id="sDebt" inputmode="numeric" value="0"><span class="cur">₽</span></div>
+    </div>
+
+    <div class="two">
+      <div class="field">
+        <label for="sOwn">Срок владения</label>
+        <div class="inp"><select id="sOwn">
+          <option value="0">Менее 3 лет</option>
+          <option value="3">От 3 до 5 лет</option>
+          <option value="5" selected>5 лет и больше</option>
+        </select><span class="arrow">▼</span></div>
+      </div>
+      <div class="field">
+        <label for="sFee">Услуги эксперта</label>
+        <div class="inp"><input type="text" id="sFee" inputmode="decimal" value="3"><span class="cur">%</span></div>
+      </div>
+    </div>
+
+    <label class="check"><input type="checkbox" id="sSingle">
+      <span>Это единственное жильё, либо получено в наследство, в дар от близкого родственника, по приватизации или ренте — тогда достаточно 3 лет владения</span></label>
+
+    <div id="taxBlock">
+      <div class="field">
+        <label for="sBuyPrice">За сколько вы покупали эту квартиру</label>
+        <div class="inp"><input type="text" id="sBuyPrice" inputmode="numeric" value="0"><span class="cur">₽</span></div>
+      </div>
+      <div class="field">
+        <label for="sCad">Кадастровая стоимость</label>
+        <div class="inp"><input type="text" id="sCad" inputmode="numeric" value="0"><span class="cur">₽</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Покупка</h2>
+    <p class="sub">Квартира, которую вы берёте взамен</p>
+    <div class="rule"></div>
+
+    <div class="field">
+      <label for="bPrice">Цена покупки</label>
+      <div class="inp"><input type="text" id="bPrice" inputmode="numeric" value="28 000 000"><span class="cur">₽</span></div>
+    </div>
+    <div class="field">
+      <label for="bCash">Свои накопления, помимо денег от продажи</label>
+      <div class="inp"><input type="text" id="bCash" inputmode="numeric" value="1 000 000"><span class="cur">₽</span></div>
+    </div>
+    <div class="field">
+      <label for="bExtra">Расходы на сделку: расчёты, пошлины, нотариус, переезд</label>
+      <div class="inp"><input type="text" id="bExtra" inputmode="numeric" value="150 000"><span class="cur">₽</span></div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Ипотека на разницу</h2>
+    <p class="sub">Если своих денег не хватает</p>
+    <div class="rule"></div>
+    <div class="two">
+      <div class="field">
+        <label for="mRate">Ставка</label>
+        <div class="inp"><input type="text" id="mRate" inputmode="decimal" value="18,5"><span class="cur">%</span></div>
+      </div>
+      <div class="field">
+        <label for="mTerm">Срок</label>
+        <div class="inp"><input type="text" id="mTerm" inputmode="numeric" value="20"><span class="cur">лет</span></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="result">
+    <h2>Что остаётся от продажи</h2>
+    <div class="row"><span class="k">Цена продажи</span><span class="v" id="rPrice">—</span></div>
+    <div class="row minus"><span class="k">Погашение ипотеки</span><span class="v" id="rDebt">—</span></div>
+    <div class="row minus"><span class="k">Услуги эксперта</span><span class="v" id="rFee">—</span></div>
+    <div class="row minus"><span class="k" id="rTaxK">НДФЛ с продажи</span><span class="v" id="rTax">—</span></div>
+    <div class="row tot"><span class="k">На руки после продажи</span><span class="v" id="rNet">—</span></div>
+    <p class="note" id="taxNote"></p>
+  </div>
+
+  <div class="result">
+    <h2>Чем закрываем покупку</h2>
+    <div class="row"><span class="k">Цена покупки и расходы</span><span class="v" id="rNeed">—</span></div>
+    <div class="row minus"><span class="k">Деньги от продажи</span><span class="v" id="rFrom">—</span></div>
+    <div class="row minus"><span class="k">Свои накопления</span><span class="v" id="rCash">—</span></div>
+
+    <div class="verdict">
+      <div class="lab" id="vLab">Не хватает</div>
+      <div class="big" id="vBig">—</div>
+      <div class="exp" id="vExp"></div>
+    </div>
+  </div>
+
+  <button class="act" id="copy">Скопировать расчёт текстом</button>
+
+  <p class="foot"><b>ТОЧНОСТЬ РЕШАЕТ</b><br>Предварительный расчёт. Итоговые цифры зависят от документов по объекту.</p>
+</div>
+
+<div class="bar"><div class="in">
+  <span class="k" id="barK">Нужно доложить</span>
+  <span class="v need" id="barV">—</span>
+</div></div>
+
+<script>
+(function(){
+  var ids=['sPrice','sDebt','sFee','sBuyPrice','sCad','bPrice','bCash','bExtra','mRate','mTerm'];
+  var fmtInts=['sPrice','sDebt','sBuyPrice','sCad','bPrice','bCash','bExtra'];
+
+  function num(id){
+    var el=document.getElementById(id);
+    var v=(el.value||'').replace(/\s|\u00a0/g,'').replace(',','.').replace(/[^\d.]/g,'');
+    var n=parseFloat(v);
+    return isNaN(n)?0:n;
+  }
+  function money(n){
+    n=Math.round(n);
+    return n.toLocaleString('ru-RU')+' ₽';
+  }
+  function groupInput(el){
+    var start=el.selectionStart, before=el.value.length;
+    var raw=el.value.replace(/\D/g,'');
+    el.value = raw ? parseInt(raw,10).toLocaleString('ru-RU') : '';
+    var diff=el.value.length-before;
+    try{el.setSelectionRange(start+diff,start+diff);}catch(e){}
+  }
+
+  function ndfl(base){
+    if(base<=0) return 0;
+    return base<=2400000 ? base*0.13 : 2400000*0.13 + (base-2400000)*0.15;
+  }
+
+  var last={};
+
+  function calc(){
+    var price=num('sPrice'), debt=num('sDebt'), feePct=num('sFee');
+    var own=parseInt(document.getElementById('sOwn').value,10);
+    var single=document.getElementById('sSingle').checked;
+    var minTerm=single?3:5;
+    var exempt = own>=minTerm;
+
+    var buyPrice=num('sBuyPrice'), cad=num('sCad');
+    var fee=price*feePct/100;
+
+    var tax=0, note='';
+    document.getElementById('taxBlock').style.display = exempt?'none':'block';
+
+    if(exempt){
+      note='Налога нет: срок владения — от '+minTerm+' лет.';
+      document.getElementById('rTaxK').textContent='НДФЛ с продажи';
+    }else{
+      var income=price;
+      var cadBase=cad*0.7;
+      var byCad=false;
+      if(cadBase>income){ income=cadBase; byCad=true; }
+      var baseCost=income-buyPrice;
+      var baseDed=income-1000000;
+      var useCost = buyPrice>0 && baseCost<baseDed;
+      var base=Math.max(0, useCost?baseCost:baseDed);
+      tax=ndfl(base);
+      document.getElementById('rTaxK').textContent='НДФЛ с продажи ('+(useCost?'минус расходы':'вычет 1 млн')+')';
+      note='Срок владения меньше '+minTerm+' лет. Налог посчитан как '+(useCost?'разница между продажей и вашей ценой покупки':'доход минус вычет 1 000 000 ₽')+' — выбран вариант, который выгоднее. Ставка 13% до 2,4 млн дохода, дальше 15%.';
+      if(byCad) note+=' Доход взят от кадастровой стоимости (70%), потому что она выше цены продажи.';
+    }
+
+    var net=price-debt-fee-tax;
+
+    var bPrice=num('bPrice'), cash=num('bCash'), extra=num('bExtra');
+    var need=bPrice+extra;
+    var gap=need-net-cash;
+
+    document.getElementById('rPrice').textContent=money(price);
+    document.getElementById('rDebt').textContent='− '+money(debt);
+    document.getElementById('rFee').textContent='− '+money(fee);
+    document.getElementById('rTax').textContent='− '+money(tax);
+    document.getElementById('rNet').textContent=money(net);
+    document.getElementById('taxNote').textContent=note;
+
+    document.getElementById('rNeed').textContent=money(need);
+    document.getElementById('rFrom').textContent='− '+money(net);
+    document.getElementById('rCash').textContent='− '+money(cash);
+
+    var big=document.getElementById('vBig'), lab=document.getElementById('vLab'), exp=document.getElementById('vExp');
+    var barK=document.getElementById('barK'), barV=document.getElementById('barV');
+    var payment=0;
+
+    if(gap>0){
+      var r=num('mRate')/100/12, n=num('mTerm')*12;
+      payment = (r>0&&n>0) ? gap*r/(1-Math.pow(1+r,-n)) : (n>0?gap/n:0);
+      lab.textContent='Не хватает';
+      big.textContent=money(gap);
+      big.style.color='var(--red)';
+      exp.textContent='Ипотека на эту сумму под '+num('mRate').toString().replace('.',',')+'% на '+num('mTerm')+' лет — платёж около '+money(payment)+' в месяц.';
+      barK.textContent='Нужно доложить';
+      barV.textContent=money(gap);
+      barV.className='v need';
+    }else{
+      lab.textContent='Остаётся свободных денег';
+      big.textContent=money(-gap);
+      big.style.color='var(--brass)';
+      exp.textContent='Ипотека не нужна: продажи и накоплений хватает на покупку целиком.';
+      barK.textContent='Остаётся на руках';
+      barV.textContent=money(-gap);
+      barV.className='v left';
+    }
+
+    last={price:price,debt:debt,fee:fee,tax:tax,net:net,need:need,cash:cash,gap:gap,pay:payment,exempt:exempt};
+  }
+
+  ids.forEach(function(id){
+    var el=document.getElementById(id);
+    el.addEventListener('input',function(){
+      if(fmtInts.indexOf(id)>-1) groupInput(el);
+      calc();
+    });
+  });
+  document.getElementById('sOwn').addEventListener('change',calc);
+  document.getElementById('sSingle').addEventListener('change',calc);
+
+  document.getElementById('copy').addEventListener('click',function(){
+    var L=last, t=[];
+    t.push('РАСЧЁТ АЛЬТЕРНАТИВНОЙ СДЕЛКИ');
+    t.push('');
+    t.push('Продажа: '+money(L.price));
+    if(L.debt>0) t.push('Погашение ипотеки: −'+money(L.debt));
+    t.push('Услуги эксперта: −'+money(L.fee));
+    t.push('НДФЛ: '+(L.exempt?'0 ₽ (срок владения выдержан)':'−'+money(L.tax)));
+    t.push('На руки после продажи: '+money(L.net));
+    t.push('');
+    t.push('Покупка с расходами: '+money(L.need));
+    t.push('Свои накопления: '+money(L.cash));
+    t.push(L.gap>0 ? 'Не хватает: '+money(L.gap)+' (платёж ≈ '+money(L.pay)+'/мес)'
+                   : 'Остаётся свободных денег: '+money(-L.gap));
+    t.push('');
+    t.push('Шмидт Капитал. Точность решает.');
+    var s=t.join('\n'), b=this;
+    function done(){ b.textContent='Скопировано'; setTimeout(function(){b.textContent='Скопировать расчёт текстом';},1600); }
+    if(navigator.clipboard&&navigator.clipboard.writeText){
+      navigator.clipboard.writeText(s).then(done,function(){fallback(s,done);});
+    }else fallback(s,done);
+  });
+
+  function fallback(s,cb){
+    var ta=document.createElement('textarea');
+    ta.value=s; ta.style.position='fixed'; ta.style.opacity='0';
+    document.body.appendChild(ta); ta.select();
+    try{document.execCommand('copy');cb();}catch(e){}
+    document.body.removeChild(ta);
+  }
+
+  calc();
+})();
+</script>
+</body>
+</html>
