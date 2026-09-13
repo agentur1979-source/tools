@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Подбор новостройки в Москве — Шмидт Капитал</title>
+<meta name="description" content="Подбор жилого комплекса в Москве по бюджету, классу и локации. С плюсами и минусами каждого проекта — без рекламных формулировок.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   ПРАВИТЬ ЗДЕСЬ: база ЖК находится ниже, в блоке <script>,
+   переменная PROJECTS. Формат одной записи описан комментарием.
+   ============================================================ */
+:root{
+  --graphite:#14171a;
+  --graphite-2:#1c2025;
+  --line:#2b3138;
+  --brass:#b08d57;
+  --brass-dim:#8a6f45;
+  --paper:#e8e6e1;
+  --muted:#8e959c;
+  --signal:#c0392b;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--graphite);
+  background-image:
+    linear-gradient(rgba(176,141,87,.045) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(176,141,87,.045) 1px,transparent 1px);
+  background-size:28px 28px;
+  color:var(--paper);
+  font-family:'IBM Plex Sans',system-ui,sans-serif;
+  font-size:16px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:760px;margin:0 auto;padding:28px 20px 80px}
+
+/* --- шапка --- */
+.brandbar{display:flex;align-items:center;gap:12px;margin-bottom:44px}
+.mark{width:30px;height:34px;flex:0 0 auto}
+.brandname{
+  font-family:'IBM Plex Sans Condensed',sans-serif;
+  font-weight:600;letter-spacing:.14em;font-size:13px;color:var(--brass);
+}
+.brandname span{display:block;color:var(--muted);letter-spacing:.08em;font-size:11px;font-weight:500}
+
+h1{
+  font-family:'IBM Plex Sans Condensed',sans-serif;
+  font-weight:700;
+  font-size:clamp(30px,7.5vw,46px);
+  line-height:1.05;
+  margin:0 0 18px;
+  letter-spacing:-.01em;
+}
+.lede{color:var(--muted);max-width:60ch;margin:0 0 10px}
+.lede strong{color:var(--paper);font-weight:500}
+
+/* --- форма --- */
+.form{margin-top:40px}
+.q{border-top:1px solid var(--line);padding:22px 0}
+.q:last-of-type{border-bottom:1px solid var(--line)}
+.q-head{display:flex;align-items:baseline;gap:10px;margin-bottom:14px}
+.q-num{
+  font-family:'IBM Plex Sans Condensed',sans-serif;
+  color:var(--brass-dim);font-size:13px;font-weight:600;
+  min-width:18px;
+}
+.q-title{font-weight:600;font-size:17px}
+.q-hint{color:var(--muted);font-size:14px;margin:-8px 0 14px 28px}
+.opts{display:flex;flex-wrap:wrap;gap:8px;margin-left:28px}
+.opt{position:relative}
+.opt input{position:absolute;opacity:0;width:100%;height:100%;left:0;top:0;margin:0;cursor:pointer}
+.opt span{
+  display:block;padding:9px 15px;border:1px solid var(--line);
+  background:var(--graphite-2);border-radius:2px;font-size:15px;
+  transition:border-color .12s,color .12s,background .12s;
+}
+.opt input:checked+span{border-color:var(--brass);color:var(--brass);background:rgba(176,141,87,.09)}
+.opt input:focus-visible+span{outline:2px solid var(--brass);outline-offset:2px}
+
+.submit{
+  margin-top:32px;width:100%;padding:17px;border:none;border-radius:2px;
+  background:var(--brass);color:#14171a;
+  font-family:'IBM Plex Sans Condensed',sans-serif;
+  font-weight:700;font-size:18px;letter-spacing:.04em;cursor:pointer;
+}
+.submit:hover{background:#c29c60}
+.submit:focus-visible{outline:3px solid var(--paper);outline-offset:2px}
+
+/* --- результаты --- */
+#results{margin-top:52px}
+.res-head{border-bottom:1px solid var(--line);padding-bottom:14px;margin-bottom:8px}
+.res-head h2{
+  font-family:'IBM Plex Sans Condensed',sans-serif;
+  font-size:24px;margin:0 0 6px;font-weight:700;
+}
+.res-head p{margin:0;color:var(--muted);font-size:14px}
+
+.card{border-bottom:1px solid var(--line);padding:28px 0}
+.card-top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px}
+.card-name{
+  font-family:'IBM Plex Sans Condensed',sans-serif;
+  font-size:26px;font-weight:700;line-height:1.1;margin:0 0 4px;
+}
+.card-meta{color:var(--muted);font-size:14px}
+.match{text-align:right;flex:0 0 auto}
+.match b{
+  display:block;font-family:'IBM Plex Sans Condensed',sans-serif;
+  font-size:34px;font-weight:700;line-height:1;color:var(--signal);
+}
+.match i{font-style:normal;font-size:11px;color:var(--muted);letter-spacing:.06em}
+.card-desc{margin:16px 0 18px;max-width:62ch}
+.pm{display:grid;gap:18px;grid-template-columns:1fr}
+@media(min-width:620px){.pm{grid-template-columns:1fr 1fr;gap:28px}}
+.pm h4{
+  font-family:'IBM Plex Sans Condensed',sans-serif;
+  font-size:14px;margin:0 0 8px;font-weight:600;letter-spacing:.06em;
+}
+.pm-plus h4{color:var(--brass)}
+.pm-minus h4{color:var(--muted)}
+.pm ul{margin:0;padding-left:17px}
+.pm li{margin-bottom:5px;font-size:15px}
+.pm-minus li{color:#b6bcc2}
+.price{
+  margin-top:18px;font-family:'IBM Plex Sans Condensed',sans-serif;
+  font-size:15px;color:var(--brass);letter-spacing:.02em;
+}
+.empty{border:1px solid var(--line);padding:28px;border-radius:2px}
+.empty h3{font-family:'IBM Plex Sans Condensed',sans-serif;margin:0 0 10px;font-size:20px}
+.empty p{margin:0 0 6px;color:var(--muted)}
+
+/* --- резюме запроса --- */
+.summary{border-left:2px solid var(--brass);padding:14px 0 14px 16px;margin:0 0 30px}
+.summary dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:4px 14px;font-size:14px}
+.summary dt{color:var(--muted)}
+.summary dd{margin:0}
+
+/* --- точечное действие в карточке --- */
+.ask{
+  display:inline-block;margin-top:16px;padding:9px 15px;
+  border:1px solid var(--line);border-radius:2px;
+  background:none;color:var(--brass);font:inherit;font-size:14px;cursor:pointer;
+}
+.ask:hover{border-color:var(--brass)}
+.ask:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+
+/* --- финал --- */
+.cta{margin-top:44px;border:1px solid var(--brass-dim);padding:26px;border-radius:2px}
+.cta h3{font-family:'IBM Plex Sans Condensed',sans-serif;font-size:21px;margin:0 0 10px}
+.cta p{margin:0 0 18px;color:#c3c8cd;font-size:15px}
+.cta ul{margin:0 0 20px;padding-left:18px;color:#c3c8cd;font-size:15px}
+.cta li{margin-bottom:6px}
+.cta a,.cta button{
+  display:inline-block;padding:14px 26px;background:var(--paper);color:#14171a;
+  text-decoration:none;border-radius:2px;font-weight:600;
+  border:none;font-family:inherit;font-size:16px;cursor:pointer;
+}
+.cta a:hover,.cta button:hover{background:#fff}
+.cta button:focus-visible,.cta a:focus-visible{outline:3px solid var(--brass);outline-offset:2px}
+.note{margin:14px 0 0;font-size:13px;color:var(--muted)}
+.note[hidden]{display:none}
+.second{
+  margin-top:20px;border-top:1px solid var(--line);padding-top:18px;
+  font-size:14px;color:var(--muted);
+}
+.second a{
+  color:var(--brass);background:none;padding:0;display:inline;
+  font-weight:500;text-decoration:underline;
+}
+.second a:hover{background:none;color:var(--paper)}
+.foot{margin-top:52px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);padding-top:20px}
+.foot b{
+  color:var(--brass);font-family:'IBM Plex Sans Condensed',sans-serif;
+  letter-spacing:.1em;font-weight:600;display:block;margin-bottom:6px;
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="brandbar">
+    <svg class="mark" viewBox="0 0 60 68" aria-label="Шмидт Капитал">
+      <polygon points="30,2 57,17 57,51 30,66 3,51 3,17" fill="none" stroke="#b08d57" stroke-width="4"/>
+      <polygon points="30,9 51,21 51,47 30,59 9,47 9,21" fill="none" stroke="#b08d57" stroke-width="1.4"/>
+      <g fill="#b08d57">
+        <rect x="19" y="24" width="4.5" height="18"/>
+        <rect x="27.7" y="24" width="4.5" height="18"/>
+        <rect x="36.4" y="24" width="4.5" height="18"/>
+        <rect x="19" y="42" width="22" height="4.5"/>
+      </g>
+    </svg>
+    <div class="brandname">ШМИДТ КАПИТАЛ<span>Точность решает</span></div>
+  </div>
+
+  <h1>Какая новостройка<br>вам подходит</h1>
+  <p class="lede">Пять вопросов — и вы увидите проекты, которые действительно попадают в ваши условия. <strong>С минусами, а не только с плюсами:</strong> в буклете застройщика второй половины не бывает.</p>
+  <p class="lede" id="scope"></p>
+
+  <form class="form" id="form">
+
+    <div class="q">
+      <div class="q-head"><div class="q-num">1</div><div class="q-title">Бюджет на квартиру</div></div>
+      <div class="opts" data-group="budget">
+        <label class="opt"><input type="radio" name="budget" value="0" checked><span>До 15 млн</span></label>
+        <label class="opt"><input type="radio" name="budget" value="1"><span>15–30 млн</span></label>
+        <label class="opt"><input type="radio" name="budget" value="2"><span>30–60 млн</span></label>
+        <label class="opt"><input type="radio" name="budget" value="3"><span>60–120 млн</span></label>
+        <label class="opt"><input type="radio" name="budget" value="4"><span>От 120 млн</span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q-head"><div class="q-num">2</div><div class="q-title">Где смотрите</div></div>
+      <p class="q-hint">Можно отметить несколько. Если всё равно — не отмечайте ничего.</p>
+      <div class="opts" data-group="area">
+        <label class="opt"><input type="checkbox" name="area" value="center"><span>Центр</span></label>
+        <label class="opt"><input type="checkbox" name="area" value="west"><span>Запад и северо-запад</span></label>
+        <label class="opt"><input type="checkbox" name="area" value="north"><span>Север</span></label>
+        <label class="opt"><input type="checkbox" name="area" value="south"><span>Юг и юго-восток</span></label>
+        <label class="opt"><input type="checkbox" name="area" value="east"><span>Восток</span></label>
+        <label class="opt"><input type="checkbox" name="area" value="new"><span>Новая Москва</span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q-head"><div class="q-num">3</div><div class="q-title">Когда нужны ключи</div></div>
+      <div class="opts" data-group="ready">
+        <label class="opt"><input type="radio" name="ready" value="any" checked><span>Не принципиально</span></label>
+        <label class="opt"><input type="radio" name="ready" value="now"><span>Дом уже сдан</span></label>
+        <label class="opt"><input type="radio" name="ready" value="soon"><span>В ближайший год</span></label>
+        <label class="opt"><input type="radio" name="ready" value="later"><span>Готов ждать</span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q-head"><div class="q-num">4</div><div class="q-title">Для чего покупаете</div></div>
+      <div class="opts" data-group="goal">
+        <label class="opt"><input type="radio" name="goal" value="live" checked><span>Жить самому</span></label>
+        <label class="opt"><input type="radio" name="goal" value="invest"><span>Вложить деньги</span></label>
+        <label class="opt"><input type="radio" name="goal" value="rent"><span>Сдавать</span></label>
+        <label class="opt"><input type="radio" name="goal" value="kids"><span>Переезд с детьми</span></label>
+      </div>
+    </div>
+
+    <div class="q">
+      <div class="q-head"><div class="q-num">5</div><div class="q-title">Что важно в проекте</div></div>
+      <p class="q-hint">Отметьте до трёх пунктов — по ним и будет считаться совпадение.</p>
+      <div class="opts" data-group="tags">
+        <label class="opt"><input type="checkbox" name="tags" value="water"><span>Вода рядом</span></label>
+        <label class="opt"><input type="checkbox" name="tags" value="park"><span>Парк рядом</span></label>
+        <label class="opt"><input type="checkbox" name="tags" value="metro"><span>Метро пешком</span></label>
+        <label class="opt"><input type="checkbox" name="tags" value="school"><span>Школа в проекте</span></label>
+        <label class="opt"><input type="checkbox" name="tags" value="view"><span>Видовые этажи</span></label>
+        <label class="opt"><input type="checkbox" name="tags" value="quiet"><span>Тихая локация</span></label>
+        <label class="opt"><input type="checkbox" name="tags" value="finish"><span>С отделкой</span></label>
+        <label class="opt"><input type="checkbox" name="tags" value="arch"><span>Сильная архитектура</span></label>
+      </div>
+    </div>
+
+    <button class="submit" type="button" id="go">Показать подходящие проекты</button>
+  </form>
+
+  <div id="results" aria-live="polite"></div>
+
+  <div class="foot">
+    <b>ТОЧНОСТЬ РЕШАЕТ</b>
+    Оценки проектов — личное мнение эксперта Schmidt Capital, основанное на работе с объектами. Бюджеты указаны ориентировочно и меняются вместе с рынком: актуальные условия уточняйте перед сделкой.
+  </div>
+</div>
+
+<script>
+/* ============================================================
+   БАЗА ЖК. Это единственное место, которое нужно вести руками.
+
+   Поля одной записи:
+   name    — название проекта
+   area    — center | west | north | south | new
+   loc     — короткая строка: район, ориентир
+   cls     — Комфорт | Бизнес | Премиум | Элит
+   budget  — массив индексов бюджета, куда проект попадает:
+             0 = до 15 млн, 1 = 15–30, 2 = 30–60, 3 = 60–120, 4 = от 120
+   ready   — now | soon | later
+   goals   — для каких целей проект уместен: live, invest, rent, kids
+   tags    — water, park, metro, school, view, quiet, finish, arch
+   desc    — 1–2 предложения: что это за проект по сути
+   plus    — 3–4 пункта
+   minus   — 2–3 пункта, честно
+   price   — строка-ориентир по бюджету
+   ============================================================ */
+
+const PROJECTS = [
+  {
+    name:"Upside Towers", area:"north", loc:"Бутырский, Огородный проезд, у метро «Бутырская»", cls:"Бизнес",
+    budget:[1,2], ready:"soon", goals:["live","invest","rent"],
+    tags:["metro","view","park","arch"],
+    desc:"Пять башен на месте промзоны, названных по горным вершинам: высотная доминанта севера города с собственным парком и бульваром внутри квартала.",
+    plus:["Метро «Бутырская» в 350 метрах, до центра дорога короткая","Виды с верхних этажей — Останкино, Ботанический сад, Сити","Свой парк 2,5 га и приватные дворы внутри квартала","Цена по локации ещё не догнала потенциал района — есть куда расти"],
+    minus:["Вокруг пока предприятия: район будет меняться, но не завтра","В основном вайтбокс — к цене квартиры прибавляйте ремонт и несколько месяцев","Вторая очередь строится до 2027 года — соседство со стройкой","Машино-мест заметно меньше, чем квартир: паркинг считайте до сделки"],
+    price:"Ориентир: около 530 тыс. ₽ за м²"
+  },
+  {
+    name:"Shagal", area:"south", loc:"Даниловский, набережная Марка Шагала (ЗИЛ-Юг)", cls:"Бизнес",
+    budget:[1,2,3], ready:"now", goals:["live","invest","rent","kids"],
+    tags:["water","park","metro","school","arch"],
+    desc:"Квартал на излучине Москвы-реки, часть большого освоения территории ЗИЛа: от таунхаусов у парка до башен с видом на город.",
+    plus:["Набережная и вода под окнами части корпусов","Форматы жилья очень разные — от таунхауса до высотки","Несколько корпусов уже введены, район обживается","Школы, детские сады и коммерция в границах квартала"],
+    minus:["Стройка в квартале продлится ещё несколько лет — соседство с площадкой","Транспортная сеть района достраивается вместе с домами","Корпуса сильно отличаются: вид и цена соседних лотов расходятся в разы"],
+    price:"Ориентир по лотам: примерно от 14 до 110 млн"
+  },
+  {
+    name:"Лучи", area:"west", loc:"Солнцево, у метро «Солнцево»", cls:"Комфорт",
+    budget:[0,1], ready:"soon", goals:["live","rent","kids"],
+    tags:["metro","school","finish","park"],
+    desc:"Большой квартал ЛСР на 35 гектарах: одна из немногих точек входа в московскую новостройку по нижней границе бюджета.",
+    plus:["До метро «Солнцево» 3–5 минут пешком","Готовая отделка — можно въезжать без ремонта","Две школы и четыре детских сада на территории","Часть домов уже сдана, видно, что получилось"],
+    minus:["Около семи тысяч квартир — очень плотное соседство","Солнцево далеко от центра, дорога съедает время","Корпуса разные по технологии, качество отличается от дома к дому"],
+    price:"Ориентир по лотам: примерно от 9 до 25 млн"
+  },
+  {
+    name:"Левел Южнопортовая", area:"south", loc:"Печатники, у метро «Кожуховская»", cls:"Комфорт",
+    budget:[0,1,2], ready:"soon", goals:["live","invest","rent","kids"],
+    tags:["water","metro","school","finish"],
+    desc:"Реновация промзоны на юго-востоке: четырнадцать разновысотных корпусов со своей школой, садом и большой благоустроенной территорией.",
+    plus:["До Москвы-реки около 400 метров","Три варианта готовности, включая вайтбокс и дизайнерскую отделку","Школа на 900 мест и сад на 400 мест в проекте","Выезды на ТТК и Волгоградский проспект рядом"],
+    minus:["Более шести тысяч квартир — масштаб и плотность как у района","Крупных парков рядом нет, только пойма реки","До метро идти 10–15 минут, а не «два шага»","ТТК в полутора километрах — шум зависит от корпуса"],
+    price:"Ориентир по лотам: примерно от 11 до 85 млн"
+  },
+  {
+    name:"Эра", area:"south", loc:"Даниловский, Дербенёвская улица", cls:"Премиум",
+    budget:[2,3], ready:"now", goals:["live","invest"],
+    tags:["water","view","arch","quiet"],
+    desc:"Шесть башен в стиле ар-деко на границе Даниловского и Замоскворечья, в пяти минутах от Дербенёвской набережной.",
+    plus:["До центра около 3,5 км, Замоскворечье в пешей доступности","Панорамные виды на центр и набережные с верхних этажей","Выразительная архитектура — проект не спутать с соседями","Первая очередь достроена"],
+    minus:["Зелени в районе мало, экология Даниловского — слабое место","Окружение бывшая промзона, вид зависит от стороны дома","Следующие очереди ещё строятся"],
+    price:"Ориентир по лотам: примерно от 21 до 90 млн"
+  },
+  {
+    name:"Will Towers", area:"west", loc:"Раменки, проспект Генерала Дорохова", cls:"Бизнес",
+    budget:[1,2,3], ready:"now", goals:["live","invest","kids"],
+    tags:["park","view","quiet","school"],
+    desc:"Шесть башен от 52 до 56 этажей в зелёных Раменках, построены в 2023 году — редкое сочетание высотности и лесопарка под боком.",
+    plus:["Раменки — один из самых зелёных районов: Матвеевский лес, долина Сетуни","Виды с верхних этажей на всю западную часть города","Дома сданы, можно смотреть готовое, а не рендер","Свой выезд на Мосфильмовскую и проспект Генерала Дорохова"],
+    minus:["До метро «Минская» около 25 минут пешком — не пешая доступность","Высотность 50+ этажей: лифты, ветер, эвакуация — не всем подходит","Комплекс стоит обособленно от сложившейся застройки"],
+    price:"Ориентир по лотам: примерно от 26 до 95 млн"
+  },
+  {
+    name:"Событие", area:"west", loc:"Раменки, Аминьевское шоссе", cls:"Бизнес",
+    budget:[1,2,3], ready:"soon", goals:["live","invest","kids"],
+    tags:["park","metro","school","finish"],
+    desc:"Квартал Донстроя на западе у Матвеевского леса, с большой собственной территорией и школой внутри проекта.",
+    plus:["Лесопарк в шаговой доступности","Метро и МЦД в районе — до центра без пересадок","Своя школа и детские сады","Застройщик с понятной репутацией по качеству сдачи"],
+    minus:["Аминьевское шоссе рядом — шум и трафик для ближних корпусов","Проект большой, часть очередей ещё в стройке","Инфраструктура вокруг догоняет застройку"],
+    price:"Ориентир по лотам: примерно от 17 до 70 млн"
+  },
+  {
+    name:"Ривер Парк Кутузовский", area:"west", loc:"Дорогомилово, Кутузовский проезд", cls:"Премиум",
+    budget:[3,4], ready:"soon", goals:["live","invest"],
+    tags:["water","view","arch","metro"],
+    desc:"Башни премиум-класса у воды рядом с Кутузовским: потолки 3,1 метра, панорамное остекление, эркеры и террасы.",
+    plus:["Престижный адрес с быстрым выездом в центр","Высокие потолки и панорамные виды на реку","Есть варианты с отделкой, под чистовую и без ремонта","Фитнес, салон и сервисы в стилобате"],
+    minus:["Кутузовский проспект рядом — постоянный трафик","Плотное окружение, часть окон смотрит в соседние корпуса","Порог входа заметно выше среднего по западу"],
+    price:"Ориентир по лотам: примерно от 60 до 200 млн"
+  },
+  {
+    name:"Код Сокольники", area:"east", loc:"Сокольники, у парка", cls:"Бизнес",
+    budget:[1,2,3], ready:"soon", goals:["live","invest","rent","kids"],
+    tags:["park","metro","view","arch"],
+    desc:"Один из самых востребованных проектов бизнес-класса на востоке: главный аргумент — парк «Сокольники» рядом.",
+    plus:["Парк «Сокольники» в пешей доступности — редкость для бизнес-класса","Метро рядом, до центра быстро","Сложившийся жилой район с готовой инфраструктурой","Стабильный спрос, что помогает при перепродаже"],
+    minus:["Плотная городская застройка вокруг, свободного места мало","Часть корпусов ещё строится","Цена выше средней по востоку — платите в том числе за парк"],
+    price:"Ориентир по лотам: примерно от 18 до 80 млн"
+  },
+  {
+    name:"Преображенская площадь", area:"east", loc:"Преображенское, у метро", cls:"Премиум",
+    budget:[2,3], ready:"soon", goals:["live","invest","rent"],
+    tags:["metro","view","arch"],
+    desc:"Премиальный проект прямо у метро в сложившемся районе — случай, когда высокий класс жилья приходит на восток города.",
+    plus:["Метро в считаных минутах","Район давно обжит: школы, поликлиники, магазины уже есть","Мало конкурирующих проектов такого класса поблизости","Хорошие виды с верхних этажей"],
+    minus:["Восток традиционно оценивается рынком ниже запада — на перепродаже это видно","Оживлённая площадь рядом: транспорт и люди","Собственной территории немного"],
+    price:"Ориентир по лотам: примерно от 30 до 90 млн"
+  },
+  {
+    name:"Метроном", area:"east", loc:"Метрогородок, у «Бульвара Рокоссовского»", cls:"Комфорт",
+    budget:[1,2], ready:"now", goals:["live","kids","rent"],
+    tags:["park","metro","quiet","finish","arch"],
+    desc:"Первый московский проект «Брусники»: два дома переменной этажности с детским садом, в двенадцати минутах прогулки от Лосиного Острова.",
+    plus:["Лосиный Остров в пешей доступности — воздух и прогулки","Метро «Бульвар Рокоссовского» и МЦК «Локомотив» рядом","Застройщик известен качеством дворов, входных групп и планировок","Есть двухуровневые лоты с террасами и отдельным входом"],
+    minus:["2628 квартир в двух домах — соседей будет много","Метрогородок остаётся окраинной локацией со скромной инфраструктурой","До центра долго в любое время суток","Школы в проекте нет, только детский сад"],
+    price:"Ориентир по лотам: примерно от 16 до 45 млн"
+  },
+  {
+    name:"МОНС", area:"north", loc:"Бутырский, между «Фонвизинской» и «Тимирязевской»", cls:"Бизнес",
+    budget:[2,3], ready:"later", goals:["live","invest","kids"],
+    tags:["park","metro","quiet","arch"],
+    desc:"Квартал «Брусники» на севере в окружении трёх парков — редкая для бизнес-класса комбинация зелени и двух станций метро в шаговой доступности.",
+    plus:["Три парка вокруг: Тимирязевский, Дубки, Гончаровский","Две станции метро в пешей доступности","Проработка дворов и общих зон на уровне выше сегмента","Спокойный сложившийся район без транзитного трафика"],
+    minus:["Сдача не раньше конца 2027 года — ждать несколько лет","Цена уже заложена «в будущее»: входите по верхней границе сегмента","Бутырский застраивается активно, рядом появятся новые проекты"],
+    price:"Ориентир по лотам: примерно от 30 до 70 млн"
+  },
+  {
+    name:"Издание", area:"south", loc:"Нижегородский, Перовское шоссе", cls:"Комфорт",
+    budget:[0,1,2], ready:"later", goals:["live","invest","kids"],
+    tags:["park","metro","school","arch"],
+    desc:"Квартал «Брусники» на юго-востоке с собственным ландшафтным парком 2,4 гектара — необычно много зелени для этого бюджета.",
+    plus:["Свой парк 2,4 га внутри проекта","Метро «Нижегородская» и МЦД рядом — до центра быстро","Единый архитектурный замысел, а не набор типовых корпусов","Порог входа ниже, чем у соседних проектов с такой же транспортной доступностью"],
+    minus:["Сдача в 2027 году — деньги заморожены надолго","Нижегородский район всё ещё промышленный по окружению","Локация не престижная: при перепродаже это влияет на цену"],
+    price:"Ориентир по лотам: примерно от 15 до 45 млн"
+  },
+  {
+    name:"Дом «А»", area:"center", loc:"Хамовники, Остоженка", cls:"Премиум",
+    budget:[3,4], ready:"later", goals:["live","invest"],
+    tags:["metro","arch","quiet","view"],
+    desc:"Небольшой дом «Брусники» в самом дорогом районе Москвы — покупка адреса на Остоженке с современной архитектурой вместо реконструкции.",
+    plus:["Остоженка: адрес, который не обесценивается","Метро «Кропоткинская» в нескольких минутах","Мало квартир — приватность и отсутствие проходного двора","Качество отделки общих зон у застройщика стабильно высокое"],
+    minus:["Сдача в 2027 году — в этом сегменте сроки часто сдвигаются","Парковка в Хамовниках — постоянная головная боль","Порог входа отсекает почти всех: это не про торг"],
+    price:"Ориентир по лотам: примерно от 31 до 190 млн"
+  },
+  {
+    name:"Дом Дау", area:"center", loc:"Пресненский, Москва-Сити", cls:"Премиум",
+    budget:[3,4], ready:"soon", goals:["live","invest","rent"],
+    tags:["view","metro","arch"],
+    desc:"Сверхвысокий жилой небоскрёб в деловом центре — покупка не столько квартиры, сколько адреса и вида.",
+    plus:["Виды, которых нет больше нигде в городе","Пешком до офисов Сити и до метро","Высокий арендный спрос среди топ-менеджеров","Узнаваемый объект — легко объяснить ценность при перепродаже"],
+    minus:["Жизнь в деловом квартале: мало зелени, мало тишины","Высотные дома дороже в эксплуатации, коммунальные платежи выше","Семье с детьми локация подходит плохо"],
+    price:"Ориентир по лотам: примерно от 60 до 250 млн"
+  },
+  {
+    name:"Republic", area:"center", loc:"Пресненский, у Белорусской и «Улицы 1905 года»", cls:"Бизнес",
+    budget:[2,3], ready:"soon", goals:["live","invest","rent"],
+    tags:["metro","arch","view"],
+    desc:"Городской квартал на месте промышленной территории в пределах ТТК, с сильной архитектурой и общественными пространствами.",
+    plus:["Центр в пешей доступности, несколько станций метро рядом","Архитектура и благоустройство выше среднего по сегменту","Ликвидность — в пределах ТТК предложение ограничено","Сильный арендный спрос"],
+    minus:["Плотная застройка, своя территория небольшая","Окружение всё ещё меняется — часть соседних участков в работе","Цена за метр в этой локации одна из самых высоких в бизнес-классе"],
+    price:"Ориентир по лотам: примерно от 30 до 120 млн"
+  },
+  {
+    name:"Прокшино", area:"new", loc:"Новая Москва, у метро «Прокшино»", cls:"Комфорт",
+    budget:[0,1], ready:"soon", goals:["live","kids","rent"],
+    tags:["metro","park","school","finish"],
+    desc:"Большой район А101 у одноимённой станции метро, с парком, спортивным кластером и собственными школами.",
+    plus:["Метро прямо в районе — редкость для Новой Москвы","Парк и вода рядом, много пространства","Школы и сады строятся вместе с домами","Цена метра заметно ниже старой Москвы"],
+    minus:["До центра долго, даже на метро","Район всё ещё достраивается — стройка будет рядом не один год","Ликвидность ниже, чем у городских проектов: продавать сложнее"],
+    price:"Ориентир по лотам: примерно от 9 до 22 млн"
+  },
+  {
+    name:"Скандинавия", area:"new", loc:"Новая Москва, Коммунарка", cls:"Комфорт",
+    budget:[0,1], ready:"now", goals:["live","kids","rent"],
+    tags:["park","school","quiet","finish"],
+    desc:"Один из самых больших сложившихся районов Новой Москвы: инфраструктура здесь уже работает, а не обещана в буклете.",
+    plus:["Школы, сады и поликлиники уже действуют","Много зелени и места для детей","Готовые корпуса — видно качество и соседей","Метраж за деньги, недоступные в старой Москве"],
+    minus:["Коммунарка сильно застроена, плотность высокая","Утренние пробки на выезде в город","Рост цены медленнее, чем у городских проектов"],
+    price:"Ориентир по лотам: примерно от 10 до 24 млн"
+  },
+  {
+    name:"ЗИЛАРТ", area:"south", loc:"Даниловский, на месте завода ЗИЛ", cls:"Бизнес",
+    budget:[1,2,3], ready:"now", goals:["live","invest","rent","kids"],
+    tags:["water","park","metro","school","arch","finish"],
+    desc:"Большой квартал на бывшей промзоне у Москвы-реки: собственный парк, набережная, школы и музейная площадка внутри территории.",
+    plus:["Парк и набережная в границах квартала","Разные корпуса и архитектура — есть из чего выбирать","Готовые дома, можно смотреть живьём, а не по рендеру","Сложившаяся инфраструктура внутри"],
+    minus:["Высокая плотность застройки, дворы не камерные","Часть квартала ещё строится — шум и техника","Выезд на ТТК в часы пик тяжёлый"],
+    price:"Ориентир по лотам: от 18 до 90 млн"
+  },
+  {
+    name:"Остров", area:"west", loc:"Мнёвниковская пойма, у воды", cls:"Премиум",
+    budget:[2,3,4], ready:"soon", goals:["live","invest","kids"],
+    tags:["water","park","view","quiet","school","arch"],
+    desc:"Проект в излучине реки с большой долей зелени и воды по периметру — редкий для Москвы случай, когда природа не соседняя, а вокруг.",
+    plus:["Вода с трёх сторон, видовые квартиры","Малая этажность по меркам бизнес-класса","Продуманное благоустройство и школы в проекте","Потенциал роста по мере развития поймы"],
+    minus:["Район только формируется — инфраструктура вокруг догоняет","До метро не везде пешком","Транспортная связанность поймы пока ограничена"],
+    price:"Ориентир по лотам: от 30 до 150 млн"
+  },
+  {
+    name:"Символ", area:"south", loc:"Лефортово, набережная Яузы", cls:"Бизнес",
+    budget:[1,2,3], ready:"now", goals:["live","rent","kids"],
+    tags:["park","school","finish","arch"],
+    desc:"Квартал с собственным парком на месте промышленной территории, рядом Лефортовский парк и набережная Яузы.",
+    plus:["Свой парк внутри квартала","Близко к центру по расстоянию","Есть готовые корпуса с отделкой","Школа и детские сады в проекте"],
+    minus:["Окружение — всё ещё промышленное, вид зависит от корпуса","Шум от ТТК в ближних домах","Метро не у всех корпусов в пешей доступности"],
+    price:"Ориентир по лотам: от 17 до 70 млн"
+  },
+  {
+    name:"Сердце Столицы", area:"west", loc:"Шелепиха, набережная", cls:"Бизнес",
+    budget:[2,3], ready:"now", goals:["live","invest","rent"],
+    tags:["water","metro","view","finish"],
+    desc:"Дома прямо на набережной в шаге от делового центра — покупают ради вида на воду и дороги до Сити в несколько минут.",
+    plus:["Собственная набережная и видовые квартиры","Метро и МЦК рядом","Близость к деловому кластеру — устойчивый спрос на аренду","Дома сданы"],
+    minus:["Плотная застройка, окна часто смотрят в соседний корпус","Мало зелени в шаговой доступности","Цена за вид заметно выше средней по локации"],
+    price:"Ориентир по лотам: от 32 до 110 млн"
+  },
+  {
+    name:"Павелецкая Сити", area:"center", loc:"Даниловский, у Павелецкой", cls:"Бизнес",
+    budget:[2,3], ready:"now", goals:["live","invest","rent"],
+    tags:["metro","finish","arch"],
+    desc:"Квартал у границы центра с сильной транспортной точкой: две ветки метро, вокзал и выезды в шаговой доступности.",
+    plus:["Метро в нескольких минутах","Центр в пешей доступности","Стабильный арендный спрос","Готовые корпуса"],
+    minus:["Зелени в пешей доступности мало","Оживлённый транспортный узел — шум и люди","Дворы небольшие, для семьи с детьми тесновато"],
+    price:"Ориентир по лотам: от 30 до 95 млн"
+  },
+  {
+    name:"Сити-Бэй", area:"west", loc:"Покровское-Стрешнево, у воды", cls:"Бизнес",
+    budget:[1,2,3], ready:"soon", goals:["live","invest","kids"],
+    tags:["water","park","metro","view","school"],
+    desc:"Высотный квартал у Химкинского водохранилища и Покровского-Стрешнева — вода и большой лесопарк рядом.",
+    plus:["Лесопарк и вода в шаговой доступности","Видовые квартиры с высоких этажей","Метро рядом","Школы и сады в проекте"],
+    minus:["Высокая этажность — не всем комфортно","Часть очередей ещё в стройке","До центра далеко по времени"],
+    price:"Ориентир по лотам: от 20 до 80 млн"
+  },
+  {
+    name:"Level Причальный", area:"west", loc:"Шелепиха, у реки", cls:"Бизнес",
+    budget:[2,3], ready:"soon", goals:["live","invest","rent"],
+    tags:["water","metro","view","arch"],
+    desc:"Башни у воды рядом с деловым центром — компактный проект с акцентом на виды и архитектуру.",
+    plus:["Вид на воду и Сити с верхних этажей","Метро и МЦК рядом","Компактный проект без квартальной толпы","Ликвиден на перепродаже"],
+    minus:["Мало собственной территории","Окружение застраивается плотно","Мало вариантов больших планировок"],
+    price:"Ориентир по лотам: от 28 до 100 млн"
+  },
+  {
+    name:"Бадаевский", area:"center", loc:"Кутузовский проспект, набережная", cls:"Элит",
+    budget:[4], ready:"later", goals:["live","invest"],
+    tags:["water","view","arch","quiet"],
+    desc:"Реконструкция исторического пивоваренного завода с домом на опорах над парком — один из самых узнаваемых архитектурных проектов Москвы.",
+    plus:["Архитектура, аналогов которой в городе нет","Набережная и вид на воду","Исторические корпуса в составе проекта","Ограниченное предложение — ценность со временем растёт"],
+    minus:["Долгий срок реализации","Вход в проект от очень высокой суммы","Кутузовский рядом — трафик и шум с одной стороны"],
+    price:"Ориентир по лотам: от 130 млн"
+  },
+  {
+    name:"Лаврушинский", area:"center", loc:"Замоскворечье, у Третьяковской галереи", cls:"Элит",
+    budget:[4], ready:"soon", goals:["live","invest"],
+    tags:["quiet","view","arch","metro"],
+    desc:"Клубный дом в историческом Замоскворечье — покупают за адрес и за окружение, которое уже не изменится.",
+    plus:["Адрес, который не повторить","Тихие переулки в самом центре","Малое число квартир — приватность","Высокое качество отделки общих зон"],
+    minus:["Сложности с парковкой в районе","Исторический центр ограничивает любые изменения","Порог входа отсекает большинство покупателей"],
+    price:"Ориентир по лотам: от 150 млн"
+  },
+  {
+    name:"Хедлайнер", area:"center", loc:"Пресня, рядом с Сити", cls:"Бизнес",
+    budget:[1,2,3], ready:"now", goals:["live","invest","rent"],
+    tags:["metro","view","finish","water"],
+    desc:"Квартал у делового центра с прямым выходом к набережной — классический выбор под аренду сотрудникам Сити.",
+    plus:["Пешком до делового центра","Сильный арендный спрос круглый год","Готовые корпуса с отделкой","Набережная рядом"],
+    minus:["Очень плотное окружение, мало тишины","Дворы небольшие","Много арендаторов — состав жильцов меняется часто"],
+    price:"Ориентир по лотам: от 19 до 75 млн"
+  },
+  {
+    name:"Люблинский парк", area:"south", loc:"Люблино, у парка", cls:"Комфорт",
+    budget:[0,1], ready:"soon", goals:["live","rent","kids"],
+    tags:["park","metro","school","finish"],
+    desc:"Массовый проект у парка с готовой отделкой — вход в московскую новостройку по минимальному бюджету.",
+    plus:["Парк в шаговой доступности","Квартиры с отделкой — можно заезжать","Метро рядом","Школы и сады в проекте"],
+    minus:["Массовый сегмент — высокая плотность и много соседей","Локация не самая престижная","Рост цены ниже, чем в бизнес-классе"],
+    price:"Ориентир по лотам: от 11 до 25 млн"
+  },
+  {
+    name:"Первый Московский город-парк", area:"new", loc:"Московский, Новая Москва", cls:"Комфорт",
+    budget:[0,1], ready:"now", goals:["live","kids","rent"],
+    tags:["park","school","quiet","finish"],
+    desc:"Большой сложившийся район Новой Москвы с зеленью, школами и своей инфраструктурой — покупают ради метража за разумные деньги.",
+    plus:["Метраж, недоступный в старой Москве за те же деньги","Много зелени и пространства для детей","Инфраструктура уже работает, а не обещана","Готовые корпуса"],
+    minus:["Дорога до центра занимает много времени","Утренние пробки на выезде","Ликвидность ниже, чем у городских проектов"],
+    price:"Ориентир по лотам: от 9 до 22 млн"
+  }
+];
+
+const BUDGET_LABELS=["до 15 млн","15–30 млн","30–60 млн","60–120 млн","от 120 млн"];
+const TAG_LABELS={water:"вода рядом",park:"парк рядом",metro:"метро пешком",school:"школа в проекте",view:"видовые этажи",quiet:"тихая локация",finish:"с отделкой",arch:"сильная архитектура"};
+
+const AREA_LABELS={center:"Центр",west:"Запад и северо-запад",north:"Север",south:"Юг и юго-восток",east:"Восток",new:"Новая Москва"};
+const READY_LABELS={any:"не принципиально",now:"дом уже сдан",soon:"в ближайший год",later:"готов ждать"};
+const GOAL_LABELS={live:"жить самому",invest:"вложить деньги",rent:"сдавать",kids:"переезд с детьми"};
+const TG="https://t.me/schmidt_invest";
+let CHOICE=null;
+
+document.getElementById('scope').textContent=
+  'В базе '+PROJECTS.length+' '+plural(PROJECTS.length,'проект','проекта','проектов')+
+  '. Это не все новостройки Москвы — только те, где я был лично и могу назвать не только достоинства.';
+
+const form=document.getElementById('form');
+const results=document.getElementById('results');
+
+function vals(name){
+  return Array.from(form.querySelectorAll('input[name="'+name+'"]:checked')).map(i=>i.value);
+}
+
+document.getElementById('go').addEventListener('click',run);
+form.addEventListener('submit',function(e){e.preventDefault();run();});
+
+function run(){
+  const budget=parseInt(vals('budget')[0],10);
+  const areas=vals('area');
+  const ready=vals('ready')[0];
+  const goal=vals('goal')[0];
+  const tags=vals('tags');
+
+  const scored=PROJECTS.map(p=>{
+    let score=0,max=0;
+
+    // бюджет — основной фильтр
+    max+=40;
+    if(p.budget.includes(budget)) score+=40;
+    else if(p.budget.includes(budget-1)||p.budget.includes(budget+1)) score+=16;
+
+    // район
+    max+=20;
+    if(!areas.length) score+=20;
+    else if(areas.includes(p.area)) score+=20;
+
+    // срок
+    max+=10;
+    if(ready==='any') score+=10;
+    else if(ready===p.ready) score+=10;
+    else if((ready==='now'&&p.ready==='soon')||(ready==='soon'&&p.ready==='now')) score+=5;
+    else if(ready==='later') score+=7;
+
+    // цель
+    max+=10;
+    if(p.goals.includes(goal)) score+=10;
+
+    // приоритеты
+    max+=20;
+    if(!tags.length) score+=20;
+    else{
+      const hit=tags.filter(t=>p.tags.includes(t)).length;
+      score+=Math.round(20*hit/tags.length);
+    }
+
+    return {p:p,pct:Math.round(100*score/max),budgetFit:p.budget.includes(budget)};
+  });
+
+  const sorted=scored.sort((a,b)=>b.pct-a.pct);
+  let list=sorted.filter(s=>s.pct>=60).slice(0,4);
+  if(!list.length) list=sorted.filter(s=>s.budgetFit).slice(0,3);
+  CHOICE={budget:budget,areas:areas,ready:ready,goal:goal,tags:tags,names:list.map(s=>s.p.name)};
+  render(list,budget,tags);
+  results.scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function esc(s){return String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
+
+function render(list,budget,tags){
+  if(!list.length){
+    results.innerHTML=
+      '<div class="empty"><h3>Под эти условия готового ответа нет</h3>'+
+      '<p>Сочетание бюджета '+BUDGET_LABELS[budget]+' и остальных требований не закрывается проектами из открытой продажи.</p>'+
+      '<p>Это обычная ситуация, и она решается двумя путями: сместить один параметр или искать лот вне рекламы.</p></div>'+
+      ctaBlock();
+    bindActions();
+    return;
+  }
+  let html='<div class="res-head"><h2>'+list.length+' '+plural(list.length,'проект','проекта','проектов')+' под ваши условия</h2>'+
+    '<p>Отсортированы по совпадению. Минусы указаны те же, что я называю клиенту на встрече.</p></div>'+
+    summaryBlock();
+
+  list.forEach(item=>{
+    const p=item.p;
+    const matched=tags.filter(t=>p.tags.includes(t)).map(t=>TAG_LABELS[t]);
+    html+='<div class="card">'+
+      '<div class="card-top"><div>'+
+        '<h3 class="card-name">'+esc(p.name)+'</h3>'+
+        '<div class="card-meta">'+esc(p.cls)+' · '+esc(p.loc)+'</div>'+
+      '</div><div class="match"><b>'+item.pct+'%</b><i>совпадение</i></div></div>'+
+      '<p class="card-desc">'+esc(p.desc)+'</p>'+
+      '<div class="pm">'+
+        '<div class="pm-plus"><h4>Что здесь сильно</h4><ul>'+p.plus.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul></div>'+
+        '<div class="pm-minus"><h4>О чём молчит реклама</h4><ul>'+p.minus.map(x=>'<li>'+esc(x)+'</li>').join('')+'</ul></div>'+
+      '</div>'+
+      '<div class="price">'+esc(p.price)+(matched.length?' · попадает в ваш запрос: '+matched.join(', '):'')+'</div>'+
+      '<button class="ask" data-project="'+esc(p.name)+'">Что сейчас продаётся в «'+esc(p.name)+'»</button>'+
+    '</div>';
+  });
+
+  results.innerHTML=html+ctaBlock();
+  bindActions();
+}
+
+function summaryBlock(){
+  const c=CHOICE;
+  return '<div class="summary"><dl>'+
+    '<dt>Бюджет</dt><dd>'+BUDGET_LABELS[c.budget]+'</dd>'+
+    '<dt>Локация</dt><dd>'+(c.areas.length?c.areas.map(a=>AREA_LABELS[a]).join(', '):'вся Москва')+'</dd>'+
+    '<dt>Ключи</dt><dd>'+READY_LABELS[c.ready]+'</dd>'+
+    '<dt>Задача</dt><dd>'+GOAL_LABELS[c.goal]+'</dd>'+
+    (c.tags.length?'<dt>Важно</dt><dd>'+c.tags.map(t=>TAG_LABELS[t]).join(', ')+'</dd>':'')+
+    '</dl></div>';
+}
+
+function ctaBlock(){
+  return '<div class="cta"><h3>Проект выбрать легко. Квартиру — нет</h3>'+
+    '<p>Внутри одного адреса корпуса и лоты отличаются сильнее, чем проекты между собой: та же цена, разница в несколько миллионов по итогу. Этого нет ни в одном описании — это видно только в текущем предложении.</p>'+
+    '<ul>'+
+      '<li>Свободные лоты в подошедших проектах — с этажами, видами и ценами на сегодня</li>'+
+      '<li>Какие корпуса я бы не брал и почему</li>'+
+      '<li>Расчёт: сколько выходит в месяц при вашей сумме входа</li>'+
+    '</ul>'+
+    '<button id="lead">Получить подборку лотов</button>'+
+    '<p class="note" id="note" hidden></p>'+
+    '<div class="second">Если перед покупкой нужно продать своё — посчитайте доплату в <a href="https://agentur1979-source.github.io/tools/alternativa-calc.html">калькуляторе альтернативной сделки</a>.</div>'+
+    '</div>';
+}
+
+function requestText(project){
+  const c=CHOICE;
+  if(!c) return 'Здравствуйте! Интересует подбор новостройки в Москве.';
+  let t='Здравствуйте! Прошёл подбор на сайте.\n\n';
+  t+='Бюджет: '+BUDGET_LABELS[c.budget]+'\n';
+  t+='Локация: '+(c.areas.length?c.areas.map(a=>AREA_LABELS[a]).join(', '):'вся Москва')+'\n';
+  t+='Ключи: '+READY_LABELS[c.ready]+'\n';
+  t+='Задача: '+GOAL_LABELS[c.goal]+'\n';
+  if(c.tags.length) t+='Важно: '+c.tags.map(x=>TAG_LABELS[x]).join(', ')+'\n';
+  t+='\n';
+  t+=project
+    ? 'Интересует «'+project+'» — что сейчас в продаже?'
+    : 'Подошли: '+c.names.join(', ')+'\nПришлите, пожалуйста, свободные лоты с ценами.';
+  return t;
+}
+
+function bindActions(){
+  const note=document.getElementById('note');
+  const lead=document.getElementById('lead');
+  if(lead) lead.addEventListener('click',()=>go(requestText(null),note));
+  results.querySelectorAll('.ask').forEach(b=>{
+    b.addEventListener('click',()=>go(requestText(b.dataset.project),note));
+  });
+}
+
+function go(text,note){
+  const done=()=>{
+    if(note){
+      note.textContent='Ваш запрос скопирован — вставьте его в чат, чтобы не набирать заново.';
+      note.hidden=false;
+    }
+    window.open(TG,'_blank','noopener');
+  };
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(text).then(done,done);
+  }else{
+    const ta=document.createElement('textarea');
+    ta.value=text;ta.style.position='fixed';ta.style.opacity='0';
+    document.body.appendChild(ta);ta.select();
+    try{document.execCommand('copy');}catch(e){}
+    document.body.removeChild(ta);
+    done();
+  }
+}
+
+function plural(n,a,b,c){
+  const m=n%100,d=n%10;
+  if(m>10&&m<20)return c;
+  if(d===1)return a;
+  if(d>=2&&d<=4)return b;
+  return c;
+}
+</script>
+</body>
+</html>
