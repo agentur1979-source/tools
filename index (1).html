@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Инструменты — Шмидт Капитал</title>
+<meta name="description" content="Бесплатные расчёты и проверки для тех, кто продаёт или покупает квартиру в Москве. Без регистрации, считает в браузере.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --graphite:#14171a;
+  --graphite-2:#1c2025;
+  --line:#2b3138;
+  --brass:#b08d57;
+  --brass-dim:#8a6f45;
+  --paper:#e8e6e1;
+  --muted:#8e959c;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--graphite);
+  background-image:
+    linear-gradient(rgba(176,141,87,.045) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(176,141,87,.045) 1px,transparent 1px);
+  background-size:28px 28px;
+  color:var(--paper);
+  font-family:'IBM Plex Sans',system-ui,sans-serif;
+  font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:760px;margin:0 auto;padding:28px 20px 70px}
+
+.brandbar{display:flex;align-items:center;gap:12px;margin-bottom:44px}
+.mark{width:30px;height:34px;flex:0 0 auto}
+.brandname{font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:600;letter-spacing:.14em;font-size:13px;color:var(--brass)}
+.brandname span{display:block;color:var(--muted);letter-spacing:.08em;font-size:11px;font-weight:500}
+
+h1{font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:700;font-size:clamp(30px,7.5vw,46px);line-height:1.05;margin:0 0 18px;letter-spacing:-.01em}
+.lede{color:var(--muted);max-width:60ch;margin:0 0 40px}
+
+.tile{
+  display:block;text-decoration:none;color:inherit;
+  border-top:1px solid var(--line);padding:26px 0;
+  position:relative;
+}
+.tiles .tile:last-child{border-bottom:1px solid var(--line)}
+.tile h2{font-family:'IBM Plex Sans Condensed',sans-serif;font-size:23px;margin:0 0 8px;font-weight:700;line-height:1.15}
+.tile p{margin:0 0 14px;color:#b6bcc2;font-size:15px;max-width:58ch}
+.act{color:var(--brass);font-weight:600;font-size:15px}
+a.tile:hover h2{color:var(--brass)}
+a.tile:focus-visible{outline:2px solid var(--brass);outline-offset:4px}
+
+.soon{margin-top:46px}
+.soon-head{
+  font-family:'IBM Plex Sans Condensed',sans-serif;color:var(--brass-dim);
+  font-size:14px;letter-spacing:.1em;font-weight:600;margin-bottom:4px;
+}
+.tile.off{opacity:.55}
+.tile.off .act{color:var(--muted)}
+
+.cta{margin-top:52px;border:1px solid var(--brass-dim);padding:26px;border-radius:2px}
+.cta h3{font-family:'IBM Plex Sans Condensed',sans-serif;font-size:21px;margin:0 0 10px}
+.cta p{margin:0 0 20px;color:#c3c8cd;font-size:15px}
+.links{display:flex;flex-wrap:wrap;gap:10px}
+.links a{
+  display:inline-block;padding:13px 22px;border-radius:2px;text-decoration:none;
+  font-weight:600;font-size:15px;
+}
+.links a.primary{background:var(--paper);color:#14171a}
+.links a.primary:hover{background:#fff}
+.links a.ghost{border:1px solid var(--line);color:var(--paper)}
+.links a.ghost:hover{border-color:var(--brass);color:var(--brass)}
+.links a:focus-visible{outline:2px solid var(--brass);outline-offset:2px}
+
+.foot{margin-top:52px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);padding-top:20px}
+.foot b{color:var(--brass);font-family:'IBM Plex Sans Condensed',sans-serif;letter-spacing:.1em;font-weight:600;display:block;margin-bottom:6px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="brandbar">
+    <svg class="mark" viewBox="0 0 60 68" aria-label="Шмидт Капитал">
+      <polygon points="30,2 57,17 57,51 30,66 3,51 3,17" fill="none" stroke="#b08d57" stroke-width="4"/>
+      <polygon points="30,9 51,21 51,47 30,59 9,47 9,21" fill="none" stroke="#b08d57" stroke-width="1.4"/>
+      <g fill="#b08d57">
+        <rect x="19" y="24" width="4.5" height="18"/>
+        <rect x="27.7" y="24" width="4.5" height="18"/>
+        <rect x="36.4" y="24" width="4.5" height="18"/>
+        <rect x="19" y="42" width="22" height="4.5"/>
+      </g>
+    </svg>
+    <div class="brandname">ШМИДТ КАПИТАЛ<span>Сделки с недвижимостью в Москве</span></div>
+  </div>
+
+  <h1>Посчитайте свою сделку<br>до того, как в неё войдёте</h1>
+  <p class="lede">Бесплатные расчёты и проверки для тех, кто продаёт или покупает квартиру в Москве. Без регистрации, считает в браузере.</p>
+
+  <div class="tiles">
+
+    <a class="tile" href="zhk-podbor.html">
+      <h2>Какая новостройка вам подходит</h2>
+      <p>Пять вопросов о бюджете, районе и сроках — и вы увидите подходящие проекты с плюсами и минусами каждого. Минусы те же, что я называю клиенту на встрече.</p>
+      <div class="act">Подобрать</div>
+    </a>
+
+    <a class="tile" href="alternativa-calc.html">
+      <h2>Продаю одну, покупаю другую</h2>
+      <p>Сколько останется на руки после продажи с учётом налога и ипотеки, сколько придётся доложить на новую квартиру и каким будет платёж.</p>
+      <div class="act">Посчитать</div>
+    </a>
+
+  </div>
+
+  <div class="soon">
+    <div class="soon-head">СКОРО</div>
+    <div class="tiles">
+      <div class="tile off">
+        <h2>12 проверок перед покупкой</h2>
+        <p>Что проверить в документах и в самом объекте, чтобы не судиться через год. По пунктам, с объяснением каждого риска.</p>
+        <div class="act">В работе</div>
+      </div>
+      <div class="tile off">
+        <h2>Сколько стоит ждать семейную ипотеку</h2>
+        <p>Разница между 6% и рыночной ставкой в рублях за весь срок кредита. Цифра, которую редко считают заранее.</p>
+        <div class="act">В работе</div>
+      </div>
+      <div class="tile off">
+        <h2>Схема расчётов на сделке</h2>
+        <p>Аккредитив, ячейка, эскроу: кто, когда и при каком условии получает деньги. Наглядно, без банковского языка.</p>
+        <div class="act">В работе</div>
+      </div>
+      <div class="tile off">
+        <h2>Таймлайн сделки</h2>
+        <p>Весь путь от решения продать до передачи ключей, со сроками на каждом этапе. Чтобы понимать, где вы находитесь.</p>
+        <div class="act">В работе</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cta">
+    <h3>Нужен разбор вашей ситуации</h3>
+    <p>Если расчёт показал что-то, чего вы не ожидали, — напишите. Разберу схему сделки и скажу прямо, где риск.</p>
+    <div class="links">
+      <a class="primary" href="https://t.me/schmidt_invest">Написать в Telegram</a>
+      <a class="ghost" href="https://t.me/schmidt_capital">Канал о рынке Москвы</a>
+      <a class="ghost" href="https://instagram.com/schmidtcapital1111">Instagram</a>
+    </div>
+  </div>
+
+  <div class="foot">
+    <b>ТОЧНОСТЬ РЕШАЕТ</b>
+    Юрген Шмидт · Шмидт Капитал
+  </div>
+</div>
+</body>
+</html>
