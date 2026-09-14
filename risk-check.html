@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Проверка квартиры на риски — Шмидт Капитал</title>
+<meta name="description" content="12 вопросов о квартире, которую вы собираетесь купить. Покажет, какие риски есть в сделке и что проверить до передачи денег.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --graphite:#14171a; --graphite-2:#1c2025; --line:#2b3138;
+  --brass:#b08d57; --brass-dim:#8a6f45; --paper:#e8e6e1; --muted:#8e959c;
+  --red:#c0392b; --amber:#c98a2e; --green:#4a8c5f;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--graphite);
+  background-image:
+    linear-gradient(rgba(176,141,87,.045) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(176,141,87,.045) 1px,transparent 1px);
+  background-size:28px 28px;
+  color:var(--paper);font-family:'IBM Plex Sans',system-ui,sans-serif;
+  font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:760px;margin:0 auto;padding:28px 20px 80px}
+.brandbar{display:flex;align-items:center;gap:12px;margin-bottom:44px}
+.mark{width:30px;height:34px;flex:0 0 auto}
+.brandname{font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:600;letter-spacing:.14em;font-size:13px;color:var(--brass)}
+.brandname span{display:block;color:var(--muted);letter-spacing:.08em;font-size:11px;font-weight:500}
+h1{font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:700;font-size:clamp(30px,7.5vw,46px);line-height:1.05;margin:0 0 18px;letter-spacing:-.01em}
+.lede{color:var(--muted);max-width:60ch;margin:0 0 10px}
+.lede strong{color:var(--paper);font-weight:500}
+
+.q{border-top:1px solid var(--line);padding:22px 0}
+.q:last-of-type{border-bottom:1px solid var(--line)}
+.q-head{display:flex;align-items:baseline;gap:10px;margin-bottom:14px}
+.q-num{font-family:'IBM Plex Sans Condensed',sans-serif;color:var(--brass-dim);font-size:13px;font-weight:600;min-width:22px}
+.q-title{font-weight:600;font-size:17px}
+.opts{display:flex;flex-wrap:wrap;gap:8px;margin-left:32px}
+.opt{position:relative}
+.opt input{position:absolute;opacity:0;width:100%;height:100%;left:0;top:0;margin:0;cursor:pointer}
+.opt span{display:block;padding:9px 15px;border:1px solid var(--line);background:var(--graphite-2);border-radius:2px;font-size:15px;transition:border-color .12s,color .12s,background .12s}
+.opt input:checked+span{border-color:var(--brass);color:var(--brass);background:rgba(176,141,87,.09)}
+.opt input:focus-visible+span{outline:2px solid var(--brass);outline-offset:2px}
+
+.submit{margin-top:32px;width:100%;padding:17px;border:none;border-radius:2px;background:var(--brass);color:#14171a;font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:700;font-size:18px;letter-spacing:.04em;cursor:pointer}
+.submit:hover{background:#c29c60}
+.warn{margin-top:14px;color:var(--amber);font-size:14px}
+.warn[hidden]{display:none}
+
+#results{margin-top:52px}
+.verdict{border:1px solid var(--line);border-radius:2px;padding:28px;margin-bottom:34px}
+.verdict .lamp{font-family:'IBM Plex Sans Condensed',sans-serif;font-size:13px;letter-spacing:.14em;font-weight:600;margin-bottom:12px}
+.verdict h2{font-family:'IBM Plex Sans Condensed',sans-serif;font-size:clamp(26px,6vw,36px);margin:0 0 14px;line-height:1.1}
+.verdict p{margin:0;color:#c3c8cd;font-size:15px}
+.v-red{border-color:var(--red)} .v-red .lamp{color:var(--red)}
+.v-amber{border-color:var(--amber)} .v-amber .lamp{color:var(--amber)}
+.v-green{border-color:var(--green)} .v-green .lamp{color:var(--green)}
+
+.sec-head{font-family:'IBM Plex Sans Condensed',sans-serif;font-size:14px;letter-spacing:.1em;color:var(--brass-dim);font-weight:600;margin:0 0 6px}
+.risk{border-top:1px solid var(--line);padding:24px 0}
+.risk:last-of-type{border-bottom:1px solid var(--line)}
+.risk-top{display:flex;align-items:baseline;gap:12px}
+.dot{width:9px;height:9px;border-radius:50%;flex:0 0 auto;position:relative;top:-2px}
+.d-high{background:var(--red)} .d-mid{background:var(--amber)}
+.risk h3{font-family:'IBM Plex Sans Condensed',sans-serif;font-size:21px;margin:0 0 8px;font-weight:700;line-height:1.15}
+.risk .what{margin:0 0 12px;color:#c3c8cd;font-size:15px}
+.risk .do{margin:0;font-size:15px}
+.risk .do b{color:var(--brass);font-weight:600}
+
+.cta{margin-top:44px;border:1px solid var(--brass-dim);padding:26px;border-radius:2px}
+.cta h3{font-family:'IBM Plex Sans Condensed',sans-serif;font-size:21px;margin:0 0 10px}
+.cta p{margin:0 0 18px;color:#c3c8cd;font-size:15px}
+.cta button{display:inline-block;padding:14px 26px;background:var(--paper);color:#14171a;border:none;border-radius:2px;font-weight:600;font-family:inherit;font-size:16px;cursor:pointer}
+.cta button:hover{background:#fff}
+.note{margin:14px 0 0;font-size:13px;color:var(--muted)}
+.note[hidden]{display:none}
+.second{margin-top:20px;border-top:1px solid var(--line);padding-top:18px;font-size:14px;color:var(--muted)}
+.second a{color:var(--brass);text-decoration:underline}
+.second a:hover{color:var(--paper)}
+
+.foot{margin-top:52px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);padding-top:20px}
+.foot b{color:var(--brass);font-family:'IBM Plex Sans Condensed',sans-serif;letter-spacing:.1em;font-weight:600;display:block;margin-bottom:6px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="brandbar">
+    <svg class="mark" viewBox="0 0 60 68" aria-label="Шмидт Капитал">
+      <polygon points="30,2 57,17 57,51 30,66 3,51 3,17" fill="none" stroke="#b08d57" stroke-width="4"/>
+      <polygon points="30,9 51,21 51,47 30,59 9,47 9,21" fill="none" stroke="#b08d57" stroke-width="1.4"/>
+      <g fill="#b08d57">
+        <rect x="19" y="24" width="4.5" height="18"/><rect x="27.7" y="24" width="4.5" height="18"/>
+        <rect x="36.4" y="24" width="4.5" height="18"/><rect x="19" y="42" width="22" height="4.5"/>
+      </g>
+    </svg>
+    <div class="brandname">ШМИДТ КАПИТАЛ<span>Точность решает</span></div>
+  </div>
+
+  <h1>Что не так<br>с этой квартирой</h1>
+  <p class="lede">Двенадцать вопросов о квартире, которую вы собираетесь купить. Покажу, какие риски в ней есть и что нужно проверить <strong>до того, как вы отдадите деньги.</strong></p>
+  <p class="lede">Если чего-то не знаете — так и отвечайте. Незнание само по себе результат: именно в этих местах чаще всего и происходят потери.</p>
+
+  <form id="form">
+
+    <div class="q"><div class="q-head"><div class="q-num">1</div><div class="q-title">Как продавец получил эту квартиру</div></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q1" value="buy"><span>Купил</span></label>
+        <label class="opt"><input type="radio" name="q1" value="inherit"><span>Наследство</span></label>
+        <label class="opt"><input type="radio" name="q1" value="priv"><span>Приватизация</span></label>
+        <label class="opt"><input type="radio" name="q1" value="gift"><span>Дарение</span></label>
+        <label class="opt"><input type="radio" name="q1" value="unknown"><span>Не знаю</span></label>
+      </div></div>
+
+    <div class="q"><div class="q-head"><div class="q-num">2</div><div class="q-title">Сколько лет квартира в собственности у продавца</div></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q2" value="lt1"><span>Меньше года</span></label>
+        <label class="opt"><input type="radio" name="q2" value="1-3"><span>1–3 года</span></label>
+        <label class="opt"><input type="radio" name="q2" value="gt3"><span>Больше 3 лет</span></label>
+        <label class="opt"><input type="radio" name="q2" value="unknown"><span>Не знаю</span></label>
+      </div></div>
+
+    <div class="q"><div class="q-head"><div class="q-num">3</div><div class="q-title">Использовался ли материнский капитал при покупке</div></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q3" value="no"><span>Нет</span></label>
+        <label class="opt"><input type="radio" name="q3" value="yes"><span>Да</span></label>
+        <label class="opt"><input type="radio" name="q3" value="unknown"><span>Не знаю</span></label>
+      </div></div>
+
+    <div class="q"><div class="q-head"><div class="q-num">4</div><div class="q-title">Есть ли среди собственников несовершеннолетние</div></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q4" value="no"><span>Нет</span></label>
+        <label class="opt"><input type="radio" name="q4" value="yes"><span>Да</span></label>
+        <label class="opt"><input type="radio" name="q4" value="unknown"><span>Не знаю</span></label>
+      </div></div>
+
+    <div class="q"><div class="q-head"><div class="q-num">5</div><div class="q-title">Продавец состоит в браке или состоял на момент покупки</div></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q5" value="no"><span>Нет</span></label>
+        <label class="opt"><input type="radio" name="q5" value="yes_ok"><span>Да, согласие супруга есть</span></label>
+        <label class="opt"><input type="radio" name="q5" value="yes_no"><span>Да, согласия нет</span></label>
+        <label class="opt"><input type="radio" name="q5" value="unknown"><span>Не знаю</span></label>
+      </div></div>
+
+    <div class="q"><div class="q-head"><div class="q-num">6</div><div class="q-title">Сделку ведёт сам собственник или представитель по доверенности</div></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q6" value="self"><span>Сам собственник</span></label>
+        <label class="opt"><input type="radio" name="q6" value="proxy"><span>По доверенности</span></label>
+        <label class="opt"><input type="radio" name="q6" value="unknown"><span>Пока не ясно</span></label>
+      </div></div>
+
+    <div class="q"><div class="q-head"><div class="q-num">7</div><div class="q-title">Кто-то зарегистрирован в квартире сейчас</div></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q7" value="no"><span>Никого</span></label>
+        <label class="opt"><input type="radio" name="q7" value="yes"><span>Да, есть</span></label>
+        <label class="opt"><input type="radio" name="q7" value="unknown"><span>Не знаю</span></label>
+      </div></div>
+
+    <div class="q"><div class="q-head"><div class="q-num">8</div><div class="q-title">Была ли перепланировка</div></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q8" value="no"><span>Нет</span></label>
+        <label class="opt"><input type="radio" name="q8" value="legal"><span>Да, узаконена</span></label>
+        <label class="opt"><input type="radio" name="q8" value="illegal"><span>Да, не узаконена</span></label>
+        <label class="opt"><input type="radio" name="q8" value="unknown"><span>Не знаю</span></label>
+      </div></div>
+
+    <div class="q"><div class="q-head"><div class="q-num">9</div><div class="q-title">Цена заметно ниже похожих квартир в этом доме или районе</div></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q9" value="no"><span>Нет, в рынке</span></label>
+        <label class="opt"><input type="radio" name="q9" value="yes"><span>Да, дешевле</span></label>
+        <label class="opt"><input type="radio" name="q9" value="unknown"><span>Не сравнивал</span></label>
+      </div></div>
+
+    <div class="q"><div class="q-head"><div class="q-num">10</div><div class="q-title">Продавец торопит со сделкой или просит указать в договоре не всю сумму</div></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q10" value="no"><span>Нет</span></label>
+        <label class="opt"><input type="radio" name="q10" value="rush"><span>Торопит</span></label>
+        <label class="opt"><input type="radio" name="q10" value="lower"><span>Просит занизить</span></label>
+        <label class="opt"><input type="radio" name="q10" value="both"><span>И то, и другое</span></label>
+      </div></div>
+
+    <div class="q"><div class="q-head"><div class="q-num">11</div><div class="q-title">Проверяли продавца на банкротство и долги</div></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q11" value="yes"><span>Да, чисто</span></label>
+        <label class="opt"><input type="radio" name="q11" value="no"><span>Нет, не проверяли</span></label>
+        <label class="opt"><input type="radio" name="q11" value="found"><span>Нашли долги</span></label>
+      </div></div>
+
+    <div class="q"><div class="q-head"><div class="q-num">12</div><div class="q-title">Квартира в залоге у банка по ипотеке</div></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="q12" value="no"><span>Нет</span></label>
+        <label class="opt"><input type="radio" name="q12" value="yes"><span>Да, в залоге</span></label>
+        <label class="opt"><input type="radio" name="q12" value="unknown"><span>Не знаю</span></label>
+      </div></div>
+
+    <button class="submit" type="button" id="go">Показать риски</button>
+    <p class="warn" id="warn" hidden>Ответьте на все двенадцать вопросов — иначе картина будет неполной.</p>
+  </form>
+
+  <div id="results" aria-live="polite"></div>
+
+  <div class="foot">
+    <b>ТОЧНОСТЬ РЕШАЕТ</b>
+    Инструмент показывает типовые риски по вашим ответам и не заменяет проверку документов и юридическую консультацию. Решение по конкретной сделке принимается только после изучения выписки ЕГРН, правоустанавливающих документов и истории перехода прав.
+  </div>
+</div>
+
+<script>
+const TG="https://t.me/schmidt_invest";
+
+/* Каждое правило: условие по ответам → карточка риска.
+   w — вес: 3 высокий, 2 средний. */
+const RULES=[
+ {id:"inherit", kind:"risk", w:3, when:a=>a.q1==="inherit",
+  t:"Наследство в основании права",
+  what:"Наследник может появиться после сделки — тот, кто не знал о наследстве или был в отъезде. Срок для оспаривания считается не с даты смерти, а с момента, когда человек узнал о нарушении своего права. Формального «безопасного» срока здесь не существует.",
+  do:"Запросить круг наследников, справку нотариуса об открытии наследственного дела, письменные отказы остальных наследников. Титульное страхование в такой сделке оправдано."},
+
+ {id:"priv", kind:"risk", w:2, when:a=>a.q1==="priv",
+  t:"Приватизация: возможен отказ от участия",
+  what:"Если кто-то из проживавших отказался от приватизации, он сохраняет пожизненное право пользования квартирой. Выписать такого человека нельзя даже через суд, и новый собственник узнаёт об этом уже после сделки.",
+  do:"Запросить архивную выписку из домовой книги на дату приватизации и сверить, кто был прописан и кто участвовал."},
+
+ {id:"gift", kind:"risk", w:2, when:a=>a.q1==="gift",
+  t:"Дарение в основании права",
+  what:"Дарение оспаривают чаще купли-продажи: через недееспособность дарителя, давление или притворность сделки. Особенно если даритель жив и это не близкий родственник.",
+  do:"Проверить, жив ли даритель и в каких он отношениях с продавцом. Запросить справки из НД и ПНД на дарителя, если сделка была недавно."},
+
+ {id:"origin_unknown", kind:"gap", w:3, when:a=>a.q1==="unknown",
+  t:"Основание права неизвестно",
+  what:"Это главное, что определяет риск всей сделки. Пока непонятно, как квартира попала к продавцу, оценить её нельзя в принципе.",
+  do:"Заказать выписку ЕГРН о переходе прав — она покажет всю цепочку собственников и основания. Без неё дальше двигаться нельзя."},
+
+ {id:"short", kind:"risk", w:3, when:a=>a.q2==="lt1",
+  t:"Меньше года в собственности",
+  what:"Короткий срок владения — классический признак либо проблемы, которую сбрасывают, либо перепродажи с целью разорвать цепочку и затруднить проверку предыдущих сделок.",
+  do:"Проверять не только продавца, но и предыдущего собственника: почему он расстался с квартирой так быстро и по какой цене."},
+
+ {id:"short2", kind:"risk", w:2, when:a=>a.q2==="1-3",
+  t:"Небольшой срок владения",
+  what:"Сам по себе не опасен, но требует проверки предыдущей сделки: риски переходят по цепочке, и оспаривание сделки продавца затронет вас.",
+  do:"Изучить историю переходов права за последние годы по выписке ЕГРН."},
+
+ {id:"matkap", kind:"risk", w:3, when:a=>a.q3==="yes",
+  t:"Материнский капитал",
+  what:"При использовании маткапитала детям обязаны выделить доли. Если это не сделали, сделка оспаривается по иску детей или прокуратуры — и срок для такого иска отсчитывается с совершеннолетия ребёнка.",
+  do:"Запросить справку из Социального фонда об остатке капитала и документы о выделении долей. Если доли не выделены — требовать выделить их до сделки."},
+
+ {id:"matkap_unknown", kind:"gap", w:2, when:a=>a.q3==="unknown",
+  t:"Про материнский капитал не выяснено",
+  what:"Один из самых частых скрытых дефектов на вторичном рынке. Продавец может и сам не помнить, что средства использовались при погашении ипотеки.",
+  do:"Прямо спросить продавца и подтвердить справкой из Социального фонда — на слово в этом вопросе не полагаются."},
+
+ {id:"minor", kind:"risk", w:3, when:a=>a.q4==="yes",
+  t:"Несовершеннолетний собственник",
+  what:"Продажа возможна только с разрешения органов опеки. Без него сделка ничтожна. Опека выдаёт разрешение, если ребёнку предоставляют равноценное жильё, и проверяет это всерьёз.",
+  do:"Получить разрешение органов опеки до сделки и убедиться, что встречная покупка для ребёнка действительно состоится."},
+
+ {id:"spouse_no", kind:"risk", w:3, when:a=>a.q5==="yes_no",
+  t:"Нет согласия супруга",
+  what:"Квартира, купленная в браке, — совместная собственность, даже если записана на одного. Супруг вправе оспорить сделку, и чаще всего именно так и происходит при разводе.",
+  do:"Получить нотариальное согласие супруга. Если брак расторгнут — проверить, был ли раздел имущества, и запросить документы о нём."},
+
+ {id:"spouse_unknown", kind:"gap", w:2, when:a=>a.q5==="unknown",
+  t:"Семейное положение продавца не проверено",
+  what:"Штамп в паспорте могут заменить, а брак — не расторгнуть. Это проверяемая вещь, которую часто пропускают.",
+  do:"Запросить паспорт, свидетельство о браке или разводе, нотариальное заявление продавца о семейном положении на момент покупки."},
+
+ {id:"proxy", kind:"risk", w:3, when:a=>a.q6==="proxy",
+  t:"Сделка по доверенности",
+  what:"Доверенность может быть отозвана в день сделки, а собственник — не знать о продаже вовсе. Схемы с поддельными и отозванными доверенностями остаются самыми частыми в мошенничестве с жильём.",
+  do:"Проверить доверенность в реестре нотариата, встретиться с собственником лично и записать разговор на видео с его согласия. Если увидеться нельзя — от сделки лучше отказаться."},
+
+ {id:"registered", kind:"risk", w:2, when:a=>a.q7==="yes",
+  t:"В квартире кто-то зарегистрирован",
+  what:"Снятие с учёта — обязанность продавца, но если человек отказался от приватизации, отбывает наказание или недееспособен, выписать его не получится и через суд.",
+  do:"Получить выписку о зарегистрированных лицах, выяснить основания для каждого и прописать в договоре срок снятия с учёта с ответственностью за нарушение."},
+
+ {id:"reg_unknown", kind:"gap", w:2, when:a=>a.q7==="unknown",
+  t:"Неизвестно, кто прописан",
+  what:"Проверяется за один запрос, а цена ошибки — сосед, которого нельзя выселить.",
+  do:"Запросить справку о зарегистрированных лицах и архивную выписку из домовой книги."},
+
+ {id:"plan", kind:"risk", w:2, when:a=>a.q8==="illegal",
+  t:"Незаконная перепланировка",
+  what:"Обязанность узаконить или вернуть всё как было перейдёт к вам вместе с квартирой. Часть перепланировок не узаконивается в принципе, а банк может отказать в ипотеке на такой объект.",
+  do:"Сверить план БТИ с тем, что видите. Оценить стоимость узаконивания и вычесть её из цены или потребовать оформления до сделки."},
+
+ {id:"plan_unknown", kind:"gap", w:2, when:a=>a.q8==="unknown",
+  t:"Соответствие планировки документам не проверено",
+  what:"На глаз перепланировку часто не видно: перенос мокрых зон или демонтаж части стены выглядят как обычный ремонт.",
+  do:"Взять поэтажный план и экспликацию БТИ и пройти с ними по квартире."},
+
+ {id:"cheap", kind:"risk", w:3, when:a=>a.q9==="yes",
+  t:"Цена ниже рынка",
+  what:"Скидка на рынке недвижимости всегда чем-то оплачена. Иногда срочностью продавца, но чаще — дефектом, о котором вы пока не знаете.",
+  do:"Не торговаться дальше, а искать причину. Пока причина не найдена и не объяснена документами, аванс не вносят."},
+
+ {id:"rush", kind:"risk", w:3, when:a=>a.q10==="rush"||a.q10==="both",
+  t:"Продавец торопит",
+  what:"Спешка нужна тому, кто не хочет, чтобы вы успели проверить. Фраза про других покупателей завтра утром — рабочий инструмент давления, а не рыночная реальность.",
+  do:"Назвать свой срок проверки и держать его. Продавец с чистыми документами всегда соглашается подождать несколько дней."},
+
+ {id:"lower", kind:"risk", w:3, when:a=>a.q10==="lower"||a.q10==="both",
+  t:"Просьба занизить сумму в договоре",
+  what:"При оспаривании сделки вам вернут ровно ту сумму, что написана в договоре, — остальное вы просто подарите. Плюс теряется право на налоговый вычет с полной суммы.",
+  do:"Отказаться. Это не экономия продавца на налоге, это перенос его риска на вас."},
+
+ {id:"bankrupt", kind:"risk", w:3, when:a=>a.q11==="found",
+  t:"У продавца найдены долги",
+  what:"Если продавца признают банкротом, сделку за последние три года оспорит финансовый управляющий. Квартиру вернут в конкурсную массу, а вы встанете в очередь кредиторов.",
+  do:"От сделки при активных долгах и признаках банкротства отказаться. Если решаете идти дальше — только после консультации с юристом по банкротству."},
+
+ {id:"nocheck", kind:"gap", w:2, when:a=>a.q11==="no",
+  t:"Банкротство не проверяли",
+  what:"Проверка бесплатна и занимает минуты, а последствия пропуска — потеря квартиры без возврата денег.",
+  do:"Проверить продавца в реестре банкротств, в базе судебных приставов и в картотеке арбитражных дел."},
+
+ {id:"mortgage", kind:"risk", w:2, when:a=>a.q12==="yes",
+  t:"Квартира в залоге у банка",
+  what:"Само по себе не страшно и встречается часто, но схема расчётов усложняется: снятие обременения происходит после погашения долга, и здесь легко потерять деньги на неправильном порядке действий.",
+  do:"Проводить сделку через аккредитив или эскроу с условием раскрытия после снятия обременения и регистрации перехода права."},
+
+ {id:"mortgage_unknown", kind:"gap", w:2, when:a=>a.q12==="unknown",
+  t:"Обременения не проверены",
+  what:"Залог, арест или запрет на регистрационные действия видны в выписке ЕГРН и блокируют сделку — иногда на месяцы.",
+  do:"Заказать свежую выписку ЕГРН не раньше чем за несколько дней до сделки и проверить раздел с ограничениями."}
+];
+
+const form=document.getElementById('form');
+const results=document.getElementById('results');
+const warn=document.getElementById('warn');
+const IDS=["q1","q2","q3","q4","q5","q6","q7","q8","q9","q10","q11","q12"];
+let LAST=null;
+
+function answers(){
+  const a={};
+  IDS.forEach(id=>{
+    const el=form.querySelector('input[name="'+id+'"]:checked');
+    a[id]=el?el.value:null;
+  });
+  return a;
+}
+
+document.getElementById('go').addEventListener('click',function(){
+  const a=answers();
+  if(IDS.some(id=>!a[id])){
+    warn.hidden=false;
+    return;
+  }
+  warn.hidden=true;
+  const hits=RULES.filter(r=>r.when(a));
+  const score=hits.filter(r=>r.kind==="risk").reduce((s,r)=>s+r.w,0);
+  const gaps=hits.filter(r=>r.kind==="gap").length;
+  LAST={hits:hits,score:score,gaps:gaps};
+  render(hits,score,gaps);
+  results.scrollIntoView({behavior:'smooth',block:'start'});
+});
+
+function esc(s){return String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
+
+function render(hits,score,gaps){
+  let v;
+  if(score>=9) v={cls:"v-red",lamp:"ВЫСОКИЙ РИСК",h:"Так покупать нельзя",
+    p:"В этой сделке несколько тяжёлых рисков сразу. Каждый поодиночке решается, но вместе они означают одно: до полной проверки документов деньги передавать нельзя ни в каком виде — ни авансом, ни задатком."};
+  else if(score>0) v={cls:"v-amber",lamp:"ТРЕБУЕТ ПРОВЕРКИ",h:"Сделка возможна, но не сегодня",
+    p:"Непоправимого в анкете нет, но есть места, где теряют деньги. Каждое закрывается конкретным документом. Пока они не собраны, любая передача денег преждевременна."};
+  else if(gaps>0) v={cls:"v-amber",lamp:"СЛИШКОМ МНОГО НЕИЗВЕСТНОГО",h:"Риска не видно — потому что вы пока не смотрели",
+    p:"Подтверждённых проблем в ответах нет, но "+gaps+" "+plural(gaps,"пункт остаётся","пункта остаются","пунктов остаются")+" непроверенными. Именно в них обычно и прячется то, из-за чего потом судятся. Хорошая новость: всё это выясняется за несколько дней и почти бесплатно."};
+  else v={cls:"v-green",lamp:"ЯВНЫХ КРАСНЫХ ФЛАГОВ НЕТ",h:"Пока всё выглядит ровно",
+    p:"По вашим ответам тяжёлых рисков не видно. Это не значит, что квартира чистая: анкета не заменяет выписку ЕГРН и правоустанавливающие документы — просто в них надо смотреть, а не гадать."};
+
+  let html='<div class="verdict '+v.cls+'"><div class="lamp">'+v.lamp+'</div>'+
+    '<h2>'+v.h+'</h2><p>'+v.p+'</p></div>';
+
+  if(hits.length){
+    hits.sort((a,b)=>(b.kind==="risk")-(a.kind==="risk")||b.w-a.w);
+    html+='<p class="sec-head">ЧТО НАШЛОСЬ: '+hits.length+'</p>';
+    hits.forEach(r=>{
+      html+='<div class="risk"><div class="risk-top"><span class="dot '+(r.w>=3?'d-high':'d-mid')+'"></span><div>'+
+        '<h3>'+esc(r.t)+'</h3>'+
+        '<p class="what">'+esc(r.what)+'</p>'+
+        '<p class="do"><b>Что делать:</b> '+esc(r.do)+'</p>'+
+        '</div></div></div>';
+    });
+  }
+
+  html+='<div class="cta"><h3>Проверка — это документы, а не анкета</h3>'+
+    '<p>Выше типовые риски по вашим ответам. Есть ли они в вашей квартире на самом деле, видно только в выписке ЕГРН, истории переходов права и правоустанавливающих документах. Пришлите адрес — посмотрю и скажу прямо, где слабое место.</p>'+
+    '<button id="lead">Отправить на проверку</button>'+
+    '<p class="note" id="note" hidden></p>'+
+    '<div class="second">Ещё не выбрали квартиру? Посмотрите <a href="https://agentur1979-source.github.io/tools/zhk-podbor.html">подбор новостройки</a> или посчитайте <a href="https://agentur1979-source.github.io/tools/alternativa-calc.html">альтернативную сделку</a>.</div>'+
+    '</div>';
+
+  results.innerHTML=html;
+  document.getElementById('lead').addEventListener('click',send);
+}
+
+function plural(n,a,b,c){
+  const m=n%100,d=n%10;
+  if(m>10&&m<20)return c;
+  if(d===1)return a;
+  if(d>=2&&d<=4)return b;
+  return c;
+}
+
+function send(){
+  const note=document.getElementById('note');
+  let t='Здравствуйте! Прошёл проверку на сайте.\n\n';
+  t+='Итог: '+(LAST.score>=9?'высокий риск':LAST.score>0?'требует проверки':LAST.gaps>0?'много непроверенного':'явных красных флагов нет')+'\n';
+  if(LAST.hits.length){
+    t+='Отмечено:\n';
+    LAST.hits.forEach(r=>{t+='— '+r.t+'\n';});
+  }
+  t+='\nПосмотрите, пожалуйста, мою ситуацию.';
+  const done=()=>{
+    if(note){
+      note.textContent='Ваш результат скопирован — вставьте его в чат, чтобы не пересказывать.';
+      note.hidden=false;
+    }
+    window.open(TG,'_blank','noopener');
+  };
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(t).then(done,done);
+  }else{
+    const ta=document.createElement('textarea');
+    ta.value=t;ta.style.position='fixed';ta.style.opacity='0';
+    document.body.appendChild(ta);ta.select();
+    try{document.execCommand('copy');}catch(e){}
+    document.body.removeChild(ta);done();
+  }
+}
+</script>
+</body>
+</html>
