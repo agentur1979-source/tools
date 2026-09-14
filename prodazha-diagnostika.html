@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Почему квартира не продаётся — Шмидт Капитал</title>
+<meta name="description" content="Восемь вопросов о вашем объявлении. Покажет, на каком шаге теряются покупатели: цена, подача или показ.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Condensed:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --graphite:#14171a; --graphite-2:#1c2025; --line:#2b3138;
+  --brass:#b08d57; --brass-dim:#8a6f45; --paper:#e8e6e1; --muted:#8e959c;
+  --signal:#c0392b;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{
+  background:var(--graphite);
+  background-image:
+    linear-gradient(rgba(176,141,87,.045) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(176,141,87,.045) 1px,transparent 1px);
+  background-size:28px 28px;
+  color:var(--paper);font-family:'IBM Plex Sans',system-ui,sans-serif;
+  font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;
+}
+.wrap{max-width:760px;margin:0 auto;padding:28px 20px 80px}
+.brandbar{display:flex;align-items:center;gap:12px;margin-bottom:44px}
+.mark{width:30px;height:34px;flex:0 0 auto}
+.brandname{font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:600;letter-spacing:.14em;font-size:13px;color:var(--brass)}
+.brandname span{display:block;color:var(--muted);letter-spacing:.08em;font-size:11px;font-weight:500}
+h1{font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:700;font-size:clamp(30px,7.5vw,46px);line-height:1.05;margin:0 0 18px;letter-spacing:-.01em}
+.lede{color:var(--muted);max-width:60ch;margin:0 0 10px}
+.lede strong{color:var(--paper);font-weight:500}
+
+.q{border-top:1px solid var(--line);padding:22px 0}
+.q:last-of-type{border-bottom:1px solid var(--line)}
+.q-head{display:flex;align-items:baseline;gap:10px;margin-bottom:14px}
+.q-num{font-family:'IBM Plex Sans Condensed',sans-serif;color:var(--brass-dim);font-size:13px;font-weight:600;min-width:18px}
+.q-title{font-weight:600;font-size:17px}
+.opts{display:flex;flex-wrap:wrap;gap:8px;margin-left:28px}
+.opt{position:relative}
+.opt input{position:absolute;opacity:0;width:100%;height:100%;left:0;top:0;margin:0;cursor:pointer}
+.opt span{display:block;padding:9px 15px;border:1px solid var(--line);background:var(--graphite-2);border-radius:2px;font-size:15px;transition:border-color .12s,color .12s,background .12s}
+.opt input:checked+span{border-color:var(--brass);color:var(--brass);background:rgba(176,141,87,.09)}
+.opt input:focus-visible+span{outline:2px solid var(--brass);outline-offset:2px}
+
+.submit{margin-top:32px;width:100%;padding:17px;border:none;border-radius:2px;background:var(--brass);color:#14171a;font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:700;font-size:18px;letter-spacing:.04em;cursor:pointer}
+.submit:hover{background:#c29c60}
+.warn{margin-top:14px;color:var(--brass);font-size:14px}
+.warn[hidden]{display:none}
+
+#results{margin-top:52px}
+.verdict{border:1px solid var(--signal);border-radius:2px;padding:28px;margin-bottom:30px}
+.verdict .lamp{font-family:'IBM Plex Sans Condensed',sans-serif;font-size:13px;letter-spacing:.14em;font-weight:600;margin-bottom:12px;color:var(--signal)}
+.verdict h2{font-family:'IBM Plex Sans Condensed',sans-serif;font-size:clamp(26px,6vw,36px);margin:0 0 14px;line-height:1.1}
+.verdict p{margin:0 0 12px;color:#c3c8cd;font-size:15px}
+.verdict p:last-child{margin:0}
+.verdict.ok{border-color:var(--brass-dim)}
+.verdict.ok .lamp{color:var(--brass)}
+
+/* воронка */
+.funnel{border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:22px 0;margin-bottom:30px}
+.step{display:flex;align-items:center;gap:14px;padding:9px 0}
+.bar{height:12px;border-radius:1px;flex:0 0 auto;background:var(--brass)}
+.bar.dim{background:#3a424a}
+.step-l{font-size:15px;color:#c3c8cd}
+.step-l b{color:var(--paper);font-weight:600}
+.brk{color:var(--signal);font-size:14px;margin-left:6px}
+
+.sec-head{font-family:'IBM Plex Sans Condensed',sans-serif;font-size:14px;letter-spacing:.1em;color:var(--brass-dim);font-weight:600;margin:0 0 6px}
+.fix{border-top:1px solid var(--line);padding:22px 0}
+.fix:last-of-type{border-bottom:1px solid var(--line)}
+.fix h3{font-family:'IBM Plex Sans Condensed',sans-serif;font-size:20px;margin:0 0 8px;font-weight:700;line-height:1.15}
+.fix p{margin:0;color:#c3c8cd;font-size:15px}
+
+.cta{margin-top:44px;border:1px solid var(--brass-dim);padding:26px;border-radius:2px}
+.cta h3{font-family:'IBM Plex Sans Condensed',sans-serif;font-size:21px;margin:0 0 10px}
+.cta p{margin:0 0 18px;color:#c3c8cd;font-size:15px}
+.cta button{padding:14px 26px;background:var(--paper);color:#14171a;border:none;border-radius:2px;font-weight:600;font-family:inherit;font-size:16px;cursor:pointer}
+.cta button:hover{background:#fff}
+.note{margin:14px 0 0;font-size:13px;color:var(--muted)}
+.note[hidden]{display:none}
+
+.foot{margin-top:52px;color:var(--muted);font-size:13px;border-top:1px solid var(--line);padding-top:20px}
+.foot b{color:var(--brass);font-family:'IBM Plex Sans Condensed',sans-serif;letter-spacing:.1em;font-weight:600;display:block;margin-bottom:6px}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <div class="brandbar">
+    <svg class="mark" viewBox="0 0 60 68" aria-label="Шмидт Капитал">
+      <polygon points="30,2 57,17 57,51 30,66 3,51 3,17" fill="none" stroke="#b08d57" stroke-width="4"/>
+      <polygon points="30,9 51,21 51,47 30,59 9,47 9,21" fill="none" stroke="#b08d57" stroke-width="1.4"/>
+      <g fill="#b08d57">
+        <rect x="19" y="24" width="4.5" height="18"/><rect x="27.7" y="24" width="4.5" height="18"/>
+        <rect x="36.4" y="24" width="4.5" height="18"/><rect x="19" y="42" width="22" height="4.5"/>
+      </g>
+    </svg>
+    <div class="brandname">ШМИДТ КАПИТАЛ<span>Точность решает</span></div>
+  </div>
+
+  <h1>Почему ваша квартира<br>не продаётся</h1>
+  <p class="lede">Продажа — это воронка: объявление увидели, позвонили, приехали, предложили цену. <strong>Она рвётся всегда в одном конкретном месте,</strong> и до этого места не имеет смысла менять всё подряд.</p>
+  <p class="lede">Восемь вопросов покажут, где именно теряются ваши покупатели.</p>
+
+  <form id="form">
+
+    <div class="q"><div class="q-head"><div class="q-num">1</div><div class="q-title">Сколько времени квартира в продаже</div></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="days" value="lt2"><span>Меньше двух недель</span></label>
+        <label class="opt"><input type="radio" name="days" value="1m"><span>Около месяца</span></label>
+        <label class="opt"><input type="radio" name="days" value="3m"><span>Два–три месяца</span></label>
+        <label class="opt"><input type="radio" name="days" value="gt3"><span>Больше трёх месяцев</span></label>
+      </div></div>
+
+    <div class="q"><div class="q-head"><div class="q-num">2</div><div class="q-title">Сколько звонков было за последние две недели</div></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="calls" value="0"><span>Ни одного</span></label>
+        <label class="opt"><input type="radio" name="calls" value="few"><span>Один–три</span></label>
+        <label class="opt"><input type="radio" name="calls" value="many"><span>Больше пяти</span></label>
+        <label class="opt"><input type="radio" name="calls" value="agents"><span>Звонят только агенты</span></label>
+      </div></div>
+
+    <div class="q"><div class="q-head"><div class="q-num">3</div><div class="q-title">Сколько человек приезжало смотреть</div></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="views" value="0"><span>Никто</span></label>
+        <label class="opt"><input type="radio" name="views" value="few"><span>Один–три</span></label>
+        <label class="opt"><input type="radio" name="views" value="many"><span>Больше пяти</span></label>
+      </div></div>
+
+    <div class="q"><div class="q-head"><div class="q-num">4</div><div class="q-title">Предлагали ли вам цену после просмотра</div></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="offers" value="no"><span>Нет, никто</span></label>
+        <label class="opt"><input type="radio" name="offers" value="low"><span>Да, но сильно ниже</span></label>
+        <label class="opt"><input type="radio" name="offers" value="close"><span>Да, близко к моей</span></label>
+      </div></div>
+
+    <div class="q"><div class="q-head"><div class="q-num">5</div><div class="q-title">Как определяли цену</div></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="price" value="ads"><span>По похожим объявлениям</span></label>
+        <label class="opt"><input type="radio" name="price" value="need"><span>Сколько нужно мне</span></label>
+        <label class="opt"><input type="radio" name="price" value="expert"><span>Оценка специалиста</span></label>
+        <label class="opt"><input type="radio" name="price" value="deals"><span>По реальным сделкам в доме</span></label>
+      </div></div>
+
+    <div class="q"><div class="q-head"><div class="q-num">6</div><div class="q-title">Готовы ли двигаться в цене</div></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="move" value="no"><span>Нет, цена окончательная</span></label>
+        <label class="opt"><input type="radio" name="move" value="small"><span>Немного, в пределах торга</span></label>
+        <label class="opt"><input type="radio" name="move" value="yes"><span>Да, если появится покупатель</span></label>
+      </div></div>
+
+    <div class="q"><div class="q-head"><div class="q-num">7</div><div class="q-title">Какие фотографии в объявлении</div></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="photo" value="pro"><span>Снимал фотограф</span></label>
+        <label class="opt"><input type="radio" name="photo" value="phone"><span>Сам, на телефон</span></label>
+        <label class="opt"><input type="radio" name="photo" value="old"><span>Старые или мало</span></label>
+      </div></div>
+
+    <div class="q"><div class="q-head"><div class="q-num">8</div><div class="q-title">Кто показывает квартиру</div></div>
+      <div class="opts">
+        <label class="opt"><input type="radio" name="who" value="self"><span>Я сам</span></label>
+        <label class="opt"><input type="radio" name="who" value="rel"><span>Родственник</span></label>
+        <label class="opt"><input type="radio" name="who" value="tenant"><span>Жильцы или арендатор</span></label>
+        <label class="opt"><input type="radio" name="who" value="agent"><span>Агент</span></label>
+      </div></div>
+
+    <div class="q"><div class="q-head"><div class="q-num">9</div><div class="q-title">За сколько выставлена квартира</div></div>
+      <div style="margin-left:28px;max-width:340px;position:relative">
+        <input type="text" inputmode="numeric" id="price" placeholder="15 000 000"
+          style="width:100%;padding:13px 40px 13px 14px;background:var(--graphite-2);border:1px solid var(--line);border-radius:2px;color:var(--paper);font-family:'IBM Plex Sans Condensed',sans-serif;font-size:21px;font-weight:600">
+        <span style="position:absolute;right:14px;top:50%;transform:translateY(-50%);color:var(--muted)">₽</span>
+      </div></div>
+
+    <div class="q"><div class="q-head"><div class="q-num">10</div><div class="q-title">Адрес или жилой комплекс</div></div>
+      <p class="q-hint" style="margin-left:28px">Не обязательно. Нужен, чтобы поднять сделки именно по вашему дому</p>
+      <div style="margin-left:28px;max-width:420px">
+        <input type="text" id="addr" placeholder="улица, дом"
+          style="width:100%;padding:13px 14px;background:var(--graphite-2);border:1px solid var(--line);border-radius:2px;color:var(--paper);font-family:inherit;font-size:16px">
+      </div></div>
+
+    <button class="submit" type="button" id="go">Найти, где теряются покупатели</button>
+    <p class="warn" id="warn" hidden>Ответьте на все восемь вопросов — иначе вывод будет наугад.</p>
+  </form>
+
+  <div id="results" aria-live="polite"></div>
+
+  <div class="foot">
+    <b>ТОЧНОСТЬ РЕШАЕТ</b>
+    Вывод строится на соотношении показов, звонков и предложений — это рабочая диагностика, а не оценка стоимости. Точную цену вашей квартиры определяют по реальным сделкам в доме и районе за последние месяцы.
+  </div>
+</div>
+
+<script>
+const TG="https://t.me/schmidt_invest";
+const FMT=n=>Math.round(n).toLocaleString('ru-RU').replace(/,/g,' ');
+const IDS=["days","calls","views","offers","price","move","photo","who"];
+const form=document.getElementById('form');
+const results=document.getElementById('results');
+const warn=document.getElementById('warn');
+let LAST=null;
+
+const priceEl=document.getElementById('price');
+if(priceEl) priceEl.addEventListener('input',()=>{
+  const raw=priceEl.value.replace(/\D/g,'');
+  priceEl.value=raw?Number(raw).toLocaleString('ru-RU').replace(/,/g,' '):'';
+});
+
+function vals(){
+  const a={};
+  IDS.forEach(id=>{
+    const el=form.querySelector('input[name="'+id+'"]:checked');
+    a[id]=el?el.value:null;
+  });
+  return a;
+}
+
+document.getElementById('go').addEventListener('click',function(){
+  const a=vals();
+  if(IDS.some(id=>!a[id])){warn.hidden=false;return;}
+  warn.hidden=true;
+  const r=diagnose(a);
+  LAST={a:a,d:r};
+  render(r,a);
+  results.scrollIntoView({behavior:'smooth',block:'start'});
+});
+
+function diagnose(a){
+  const early = a.days==="lt2";
+  const noCalls = a.calls==="0"||a.calls==="agents";
+  const fewCalls = a.calls==="few";
+  const manyCalls = a.calls==="many";
+  const noViews = a.views==="0";
+  const manyViews = a.views==="many";
+
+  // где рвётся воронка
+  if(early && (noCalls||fewCalls)) return {
+    stage:"early", lamp:"СЛИШКОМ РАНО",
+    h:"Пока рано делать выводы",
+    p:["Две недели — не срок. В этот период объявление только набирает показы, а покупатели, которые смотрят рынок, ещё сравнивают варианты.",
+       "Но один сигнал уже читается: если за первую неделю не было ни одного звонка, дело почти всегда в цене. Первая неделя — пик интереса к новому объявлению, и тишина в этот момент означает, что вас отсекли на этапе фильтра по цене."],
+    fixes:["price_check","photo","channels"]
+  };
+
+  if(noCalls) return {
+    stage:"top", lamp:"ВОРОНКА РВЁТСЯ В САМОМ НАЧАЛЕ",
+    h:"Вас не видят или отсекают по цене",
+    p:["Покупатели не доходят даже до звонка. Это не про квартиру — её ещё никто не видел. Это про то, как она выглядит в списке: цена, первая фотография, заголовок.",
+       "Почти всегда причина в цене. Люди ищут по диапазону, и если вы стоите выше верхней границы своего сегмента, вас просто нет в их выдаче — квартира может быть прекрасной, её никто не откроет.",
+       "Вторая по частоте причина — первое фото. В ленте объявлений решение открыть или пролистать принимается за доли секунды."],
+    fixes:["price_market","photo","channels","text"]
+  };
+
+  if((fewCalls||manyCalls) && noViews) return {
+    stage:"mid", lamp:"ЗВОНЯТ, НО НЕ ЕДУТ",
+    h:"Теряете людей в разговоре",
+    p:["Объявление работает — интерес есть. Но между звонком и просмотром что-то отсекает покупателя.",
+       "Типичные причины: на звонок отвечают неохотно или коротко, просмотр предлагают в неудобное время, либо в разговоре всплывает то, чего не было в объявлении — обременение, альтернатива, сложные документы, торопливость.",
+       "Покупатель на этом этапе ещё не вложился в вас ничем, кроме звонка, и уходит легко."],
+    fixes:["call","time","text"]
+  };
+
+  if(manyViews && a.offers==="no") return {
+    stage:"view", lamp:"СМОТРЯТ, НО НЕ ПРЕДЛАГАЮТ",
+    h:"Квартира не оправдывает своих денег",
+    p:["Люди приезжают — значит, объявление и цена в рынке настолько, что стоит потратить время. А потом не возвращаются.",
+       "Это значит, что вживую квартира проигрывает тому, что человек увидел на фотографиях, либо проигрывает соседним вариантам за те же деньги. Иногда дело в состоянии, иногда в запахе и беспорядке, иногда — в самом показе.",
+       "Важная деталь: покупатель почти никогда не говорит правду на просмотре. Он говорит «спасибо, мы подумаем» и уходит. Поэтому причину приходится вычислять, а не спрашивать."],
+    fixes:["prep","show","price_market"]
+  };
+
+  if(a.offers==="low") return {
+    stage:"price", lamp:"РЫНОК УЖЕ НАЗВАЛ ВАШУ ЦЕНУ",
+    h:"Предложения ниже — это и есть ответ",
+    p:["Когда несколько независимых людей называют похожую сумму, это не торг и не наглость. Это рыночная цена вашей квартиры на сегодня.",
+       "Дальше вопрос простой: разница между вашей ценой и их предложением больше или меньше того, что вы теряете за месяцы ожидания. Каждый месяц простоя — это коммунальные платежи, а на падающем рынке ещё и снижение самой цены.",
+       "Часто оказывается, что через полгода квартиру продают дешевле, чем предлагали в первый месяц."],
+    fixes:["math","price_market","move"]
+  };
+
+  if(a.offers==="close") return {
+    stage:"close", lamp:"ВЫ БЛИЖЕ, ЧЕМ ДУМАЕТЕ",
+    h:"Сделка срывается на последнем шаге",
+    p:["Есть предложения близко к вашей цене — значит, и цена, и подача работают. Проблема в другом: договориться не получается.",
+       "Обычно дело в условиях, а не в сумме: сроки освобождения, альтернативная покупка, схема расчётов, кто платит за что. Эти вещи разваливают сделку чаще, чем разница в цене.",
+       "Здесь помогает не скидка, а точная структура сделки."],
+    fixes:["terms","math"]
+  };
+
+  return {
+    stage:"top", lamp:"ВОРОНКА РВЁТСЯ В НАЧАЛЕ",
+    h:"Интереса мало для такого срока",
+    p:["За это время квартира должна была собрать заметно больше звонков и просмотров. Значит, её отсекают ещё в списке объявлений — по цене или по подаче.",
+       "Менять всё сразу не нужно. Сначала проверяется цена по реальным сделкам, потом фотографии и текст."],
+    fixes:["price_market","photo","text","channels"]
+  };
+}
+
+const FIXES={
+ price_check:{t:"Цена, скорее всего, выставлена по объявлениям",
+  p:"Соседние объявления показывают, чего хотят такие же продавцы, а не за сколько реально уходят квартиры. Разница между этими двумя цифрами в Москве обычно заметная, и отсекают вас именно по ней."},
+ price_market:{t:"Ориентир должен быть на закрытые сделки",
+  p:"Единственная опора для цены — что и за сколько реально продалось в вашем доме и соседних за последние месяцы. Этих данных нет в открытом доступе: площадки показывают цены выставления, а не цены сделок."},
+ photo:{t:"Объявление отсекает раньше, чем человек дочитает",
+  p:"В ленте решение открыть или пролистать принимается за доли секунды, и принимается оно по первому кадру и цене. Всё остальное в объявлении читают уже те, кто прошёл этот фильтр."},
+ text:{t:"Общие слова не работают",
+  p:"«Уютная квартира в хорошем районе» не отличает вас ни от кого. Покупатель ищет конкретику, и её отсутствие он читает как отсутствие преимуществ."},
+ channels:{t:"Одна площадка — это часть рынка",
+  p:"Покупатели ищут по-разному и часто не пересекаются между сайтами. Ограничиваясь одним размещением, вы сознательно не показываете квартиру половине тех, кто её ищет."},
+ call:{t:"Первый разговор решает больше, чем кажется",
+  p:"Покупатель на этом этапе не вложил в вас ничего, кроме звонка, и уходит легко. Задача разговора — не пересказать объявление, а довести человека до просмотра."},
+ time:{t:"Время показа отсекает половину людей",
+  p:"Большинство покупателей работает и может приехать вечером или в выходные. Всё остальное время сужает круг до тех, кто и так никуда не торопится."},
+ prep:{t:"Вживую квартира проигрывает фотографиям",
+  p:"Если человек приехал и не вернулся, значит, ожидание не совпало с реальностью. Чаще всего дело не в ремонте, а в том, что квартиру не подготовили к встрече."},
+ show:{t:"Кто показывает — то и продаёт",
+  p:"Хозяин рассказывает про воспоминания, а покупателю нужно представить здесь себя. Жильцы и арендаторы заинтересованы в обратном: чтобы квартира не продалась."},
+ math:{t:"У ожидания есть цена",
+  p:"Каждый месяц простоя — это коммунальные платежи, проценты по ипотеке и движение самого рынка. Часто эта сумма за полгода превышает скидку, на которую вы сейчас не соглашаетесь."},
+ move:{t:"Торг без заранее определённой границы проигрывается",
+  p:"Цифра, ниже которой вы не идёте, должна быть посчитана до разговора — а не в момент, когда на вас давят в квартире."},
+ terms:{t:"Сделки разваливаются на условиях, а не на сумме",
+  p:"Сроки освобождения, схема расчётов, порядок с альтернативой — здесь теряют покупателей чаще, чем на цене. И здесь же скидка ничего не спасает."}
+};
+
+function esc(s){return String(s).replace(/[&<>]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));}
+
+function render(d,a){
+  const stages=[
+    {k:"Объявление увидели", on:true},
+    {k:"Позвонили", on:a.calls!=="0"&&a.calls!=="agents"},
+    {k:"Приехали смотреть", on:a.views!=="0"},
+    {k:"Предложили цену", on:a.offers!=="no"}
+  ];
+  let broke=false;
+  let funnel='<div class="funnel">';
+  const widths=[100,72,48,28];
+  stages.forEach((s,i)=>{
+    const dead=!s.on;
+    const isBreak=!broke&&dead;
+    if(dead) broke=true;
+    funnel+='<div class="step">'+
+      '<div class="bar'+(dead?' dim':'')+'" style="width:'+widths[i]+'px"></div>'+
+      '<div class="step-l"><b>'+s.k+'</b>'+(isBreak?'<span class="brk">← здесь обрыв</span>':'')+'</div>'+
+      '</div>';
+  });
+  funnel+='</div>';
+
+  let html='<div class="verdict'+(d.stage==="early"||d.stage==="close"?' ok':'')+'">'+
+    '<div class="lamp">'+d.lamp+'</div><h2>'+esc(d.h)+'</h2>'+
+    d.p.map(x=>'<p>'+esc(x)+'</p>').join('')+'</div>'+funnel;
+
+  const extra=[];
+  if(a.photo==="old"&&d.fixes.indexOf("photo")<0) extra.push("photo");
+  if(a.who==="tenant"&&d.fixes.indexOf("show")<0) extra.push("show");
+  if(a.price==="need"&&d.fixes.indexOf("price_market")<0) extra.push("price_market");
+  if(a.move==="no"&&d.fixes.indexOf("move")<0) extra.push("move");
+  const list=d.fixes.concat(extra);
+
+  html+='<p class="sec-head">ПОЧЕМУ ТАК ПРОИСХОДИТ</p>';
+  list.forEach(k=>{
+    const f=FIXES[k];
+    if(!f) return;
+    html+='<div class="fix"><h3>'+esc(f.t)+'</h3><p>'+esc(f.p)+'</p></div>';
+  });
+
+  const price=Number((document.getElementById('price')||{}).value?document.getElementById('price').value.replace(/\D/g,''):0)||0;
+  let torg='';
+  if(price>0){
+    torg='<p>Для вашей цены каждый процент — это '+FMT(price*0.01)+' ₽. '+
+      'Типичный торг на московском рынке составляет три–пять процентов, то есть от '+FMT(price*0.03)+
+      ' до '+FMT(price*0.05)+' ₽. Решение уступить или держаться принимается вслепую, пока вы не знаете, '+
+      'за сколько реально ушли квартиры рядом.</p>';
+  }
+
+  html+='<div class="cta"><h3>Чего вам не хватает, чтобы решить</h3>'+torg+
+    '<p>Площадки показывают цены выставления — то, чего хотят продавцы. Цены закрытых сделок в открытом доступе не публикуются, и именно они определяют, продастся ваша квартира или будет висеть.</p>'+
+    '<p>Пришлите адрес — подниму сделки по вашему дому и соседним за последние месяцы: этаж, площадь, состояние, итоговая цена. Скажу прямо, в рынке вы или нет.</p>'+
+    '<button id="lead">Запросить сделки по моему дому</button>'+
+    '<p class="note" id="note" hidden></p></div>';
+
+  results.innerHTML=html;
+  document.getElementById('lead').addEventListener('click',send);
+}
+
+function send(){
+  const note=document.getElementById('note');
+  const a=LAST.a;
+  let t='Здравствуйте! Прошёл диагностику продажи на сайте.\n\n';
+  t+='Вывод: '+LAST.d.h+'\n';
+  t+='В продаже: '+({lt2:'меньше двух недель',"1m":'около месяца',"3m":'два-три месяца',gt3:'больше трёх месяцев'})[a.days]+'\n';
+  t+='Звонки: '+({"0":'нет',few:'один-три',many:'больше пяти',agents:'только агенты'})[a.calls]+'\n';
+  t+='Просмотры: '+({"0":'не было',few:'один-три',many:'больше пяти'})[a.views]+'\n';
+  t+='Предложения: '+({no:'не было',low:'сильно ниже',close:'близко к моей'})[a.offers]+'\n';
+  const ad=(document.getElementById('addr')||{}).value;
+  const pr=(document.getElementById('price')||{}).value;
+  if(ad) t+='Адрес: '+ad+'\n';
+  if(pr) t+='Цена: '+pr+' ₽\n';
+  t+='\nПоднимите, пожалуйста, сделки по моему дому.';
+  const done=()=>{
+    if(note){note.textContent='Ваши ответы скопированы — вставьте в чат, чтобы не пересказывать.';note.hidden=false;}
+    window.open(TG,'_blank','noopener');
+  };
+  if(navigator.clipboard&&navigator.clipboard.writeText){
+    navigator.clipboard.writeText(t).then(done,done);
+  }else{
+    const ta=document.createElement('textarea');
+    ta.value=t;ta.style.position='fixed';ta.style.opacity='0';
+    document.body.appendChild(ta);ta.select();
+    try{document.execCommand('copy');}catch(e){}
+    document.body.removeChild(ta);done();
+  }
+}
+</script>
+</body>
+</html>
