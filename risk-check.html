@@ -1,6 +1,19 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+  window.YM_ID = 112744291;
+  (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+  m[i].l=1*new Date();
+  for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+  k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+  (window, document, "script", "https://mc.yandex.ru/metrika/tag.js?id=112744291", "ym");
+  ym(112744291, "init", {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112744291" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Проверка квартиры на риски — Шмидт Капитал</title>
@@ -394,7 +407,7 @@ function render(hits,score,gaps){
     '<p>Выше типовые риски по вашим ответам. Есть ли они в вашей квартире на самом деле, видно только в выписке ЕГРН, истории переходов права и правоустанавливающих документах. Пришлите адрес — посмотрю и скажу прямо, где слабое место.</p>'+
     '<button id="lead">Отправить на проверку</button>'+
     '<p class="note" id="note" hidden></p>'+
-    '<div class="second">Ещё не выбрали квартиру? Посмотрите <a href="https://agentur1979-source.github.io/tools/zhk-podbor.html">подбор новостройки</a> или посчитайте <a href="https://agentur1979-source.github.io/tools/alternativa-calc.html">альтернативную сделку</a>.</div>'+
+    '<div class="second">Ещё не выбрали квартиру? Посмотрите <a href="https://schmidtcapital.ru/zhk-podbor.html">подбор новостройки</a> или посчитайте <a href="https://schmidtcapital.ru/alternativa-calc.html">альтернативную сделку</a>.</div>'+
     '</div>';
 
   results.innerHTML=html;
@@ -435,6 +448,13 @@ function send(){
     document.body.removeChild(ta);done();
   }
 }
+</script>
+<script>
+/* Цель Метрики «tg_click»: любой клик по ссылке в Telegram */
+document.addEventListener("click", function(e){
+  var a = e.target.closest && e.target.closest('a[href*="t.me/"]');
+  if (a && window.ym) { try { ym(window.YM_ID, "reachGoal", "tg_click"); } catch(_){} }
+}, true);
 </script>
 </body>
 </html>
