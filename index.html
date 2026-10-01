@@ -29,7 +29,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <script type="application/ld+json">
-{"@context":"https://schema.org","@type":"RealEstateAgent","name":"Шмидт Капитал","url":"https://schmidtcapital.ru/","areaServed":["Москва","Московская область"],"founder":{"@type":"Person","name":"Юрген Шмидт"},"slogan":"Точность решает","telephone":"+7 995 509-17-76","address":{"@type":"PostalAddress","streetAddress":"Новорязанская ул., 23с2","addressLocality":"Москва","addressCountry":"RU"},"sameAs":["https://t.me/schmidt_capital","https://t.me/schmidt_invest","https://youtube.com/channel/UC5U6Ix1WRoSgEUeFM8-EOqw","https://instagram.com/schmidtcapital1111"]}
+{"@context":"https://schema.org","@type":"RealEstateAgent","name":"Шмидт Капитал","url":"https://schmidtcapital.ru/","areaServed":["Москва","Московская область"],"founder":{"@type":"Person","name":"Юрген Шмидт"},"slogan":"Точность решает","telephone":"+7 995 509-17-76","address":{"@type":"PostalAddress","streetAddress":"Новорязанская ул., 23с2","addressLocality":"Москва","addressCountry":"RU"},"sameAs":["https://t.me/schmidt_capital","https://t.me/schmidt_invest","https://max.ru/u/f9LHodD0cOLXSIVONJ4Ek4Ah1Q2KmL9OW2Ei-KE0Honw4wcypHIvq56i1jg","https://youtube.com/channel/UC5U6Ix1WRoSgEUeFM8-EOqw","https://instagram.com/schmidtcapital1111"]}
 </script>
 <style>
 :root{
@@ -493,6 +493,7 @@ footer b{color:var(--brass);font-family:var(--serif);font-size:22px;font-weight:
           <div class="links">
             <a href="tel:+79955091776">+7 995 509-17-76</a>
             <a href="https://t.me/schmidt_invest" target="_blank" rel="noopener">Telegram</a>
+            <a href="https://max.ru/u/f9LHodD0cOLXSIVONJ4Ek4Ah1Q2KmL9OW2Ei-KE0Honw4wcypHIvq56i1jg" target="_blank" rel="noopener">MAX</a>
             <a href="https://youtube.com/channel/UC5U6Ix1WRoSgEUeFM8-EOqw" target="_blank" rel="noopener">YouTube</a>
             <a href="https://instagram.com/schmidtcapital1111" target="_blank" rel="noopener">Instagram*</a>
           </div>
@@ -578,6 +579,7 @@ footer b{color:var(--brass);font-family:var(--serif);font-size:22px;font-weight:
     </div>
     <div class="channels">
       <a class="main" href="https://t.me/schmidt_invest" target="_blank" rel="noopener">Написать Юргену <span>Telegram</span></a>
+      <a href="https://max.ru/u/f9LHodD0cOLXSIVONJ4Ek4Ah1Q2KmL9OW2Ei-KE0Honw4wcypHIvq56i1jg" target="_blank" rel="noopener">Написать Юргену <span>MAX</span></a>
       <a href="tel:+79955091776">Позвонить Юргену <span>+7 995 509-17-76</span></a>
       <a href="https://yandex.ru/maps/?text=%D0%9C%D0%BE%D1%81%D0%BA%D0%B2%D0%B0%2C%20%D0%9D%D0%BE%D0%B2%D0%BE%D1%80%D1%8F%D0%B7%D0%B0%D0%BD%D1%81%D0%BA%D0%B0%D1%8F%20%D1%83%D0%BB%D0%B8%D1%86%D0%B0%2C%2023%D1%812" target="_blank" rel="noopener">Встреча в офисе <span>Новорязанская ул., 23с2</span></a>
       <a href="https://t.me/Svetlana_Schremser" target="_blank" rel="noopener">Написать Светлане <span>Telegram</span></a>
@@ -718,6 +720,8 @@ renderObjects();
 document.addEventListener("click", function(e){
   var a = e.target.closest && e.target.closest('a[href*="t.me/"]');
   if (a && window.ym) { try { ym(window.YM_ID, "reachGoal", "tg_click"); } catch(_){} }
+  var m = e.target.closest && e.target.closest('a[href*="max.ru/"]');
+  if (m && window.ym) { try { ym(window.YM_ID, "reachGoal", "max_click"); } catch(_){} }
   var t = e.target.closest && e.target.closest('a[href^="tel:"]');
   if (t && window.ym) { try { ym(window.YM_ID, "reachGoal", "phone_click"); } catch(_){} }
 }, true);
