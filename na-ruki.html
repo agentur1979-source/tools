@@ -16,9 +16,9 @@
 
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Расчёт альтернативной сделки — Шмидт Капитал</title>
-<meta name="description" content="Калькулятор альтернативной сделки: продаёте одну квартиру и покупаете другую. Сколько останется после налога и ипотеки и сколько придётся доложить.">
-<link rel="canonical" href="https://schmidtcapital.ru/alternativa-calc.html">
+<title>Сколько останется на руки после продажи квартиры — Шмидт Капитал</title>
+<meta name="description" content="Калькулятор для продавца: цена продажи минус ипотека, услуги и НДФЛ. Сколько денег останется на руках после продажи квартиры в Москве.">
+<link rel="canonical" href="https://schmidtcapital.ru/na-ruki.html">
 <style>
 :root{
   --graphite:#16181a;
@@ -140,8 +140,8 @@ a.act.cta{display:block;text-align:center;text-decoration:none;background:var(--
     <div class="brand">ШМИДТ КАПИТАЛ<span><a href="/" style="color:inherit;text-decoration:none">schmidtcapital.ru</a> · Сделки с недвижимостью</span></div>
   </div>
 
-  <h1>Продаю одну, покупаю другую. Сколько мне доложить?</h1>
-  <p class="lede">Расчёт альтернативной сделки: что останется после продажи, сколько не хватит на покупку и каким будет платёж, если брать ипотеку на разницу.</p>
+  <h1>Продаю квартиру. Сколько останется на руки?</h1>
+  <p class="lede">Цена в объявлении — это ещё не ваши деньги. Вычтем ипотеку, услуги и налог и покажем, сколько реально останется после продажи.</p>
 
   <section>
     <h2>Продажа</h2>
@@ -188,40 +188,6 @@ a.act.cta{display:block;text-align:center;text-decoration:none;background:var(--
     </div>
   </section>
 
-  <section>
-    <h2>Покупка</h2>
-    <p class="sub">Квартира, которую вы берёте взамен</p>
-    <div class="rule"></div>
-
-    <div class="field">
-      <label for="bPrice">Цена покупки</label>
-      <div class="inp"><input type="text" id="bPrice" inputmode="numeric" value="28 000 000"><span class="cur">₽</span></div>
-    </div>
-    <div class="field">
-      <label for="bCash">Свои накопления, помимо денег от продажи</label>
-      <div class="inp"><input type="text" id="bCash" inputmode="numeric" value="1 000 000"><span class="cur">₽</span></div>
-    </div>
-    <div class="field">
-      <label for="bExtra">Расходы на сделку: расчёты, пошлины, нотариус, переезд</label>
-      <div class="inp"><input type="text" id="bExtra" inputmode="numeric" value="150 000"><span class="cur">₽</span></div>
-    </div>
-  </section>
-
-  <section>
-    <h2>Ипотека на разницу</h2>
-    <p class="sub">Если своих денег не хватает</p>
-    <div class="rule"></div>
-    <div class="two">
-      <div class="field">
-        <label for="mRate">Ставка</label>
-        <div class="inp"><input type="text" id="mRate" inputmode="decimal" value="18,5"><span class="cur">%</span></div>
-      </div>
-      <div class="field">
-        <label for="mTerm">Срок</label>
-        <div class="inp"><input type="text" id="mTerm" inputmode="numeric" value="20"><span class="cur">лет</span></div>
-      </div>
-    </div>
-  </section>
 
   <div class="result">
     <h2>Что остаётся от продажи</h2>
@@ -233,34 +199,23 @@ a.act.cta{display:block;text-align:center;text-decoration:none;background:var(--
     <p class="note" id="taxNote"></p>
   </div>
 
-  <div class="result">
-    <h2>Чем закрываем покупку</h2>
-    <div class="row"><span class="k">Цена покупки и расходы</span><span class="v" id="rNeed">—</span></div>
-    <div class="row minus"><span class="k">Деньги от продажи</span><span class="v" id="rFrom">—</span></div>
-    <div class="row minus"><span class="k">Свои накопления</span><span class="v" id="rCash">—</span></div>
 
-    <div class="verdict">
-      <div class="lab" id="vLab">Не хватает</div>
-      <div class="big" id="vBig">—</div>
-      <div class="exp" id="vExp"></div>
-    </div>
-  </div>
-
-  <a class="act cta" id="tgSend" href="https://t.me/schmidt_invest" target="_blank" rel="noopener">Разобрать мою сделку с Юргеном в Telegram</a>
+  <a class="act cta" id="tgSend" href="https://t.me/schmidt_invest" target="_blank" rel="noopener">Обсудить продажу с Юргеном в Telegram</a>
   <button class="act" id="copy">Скопировать расчёт текстом</button>
+  <p class="foot"><a href="/" style="color:var(--brass)">schmidtcapital.ru</a> · <a href="alternativa-calc.html" style="color:var(--brass)">Продаёте и сразу покупаете? Посчитайте альтернативную сделку</a></p>
 
   <p class="foot"><b>ТОЧНОСТЬ РЕШАЕТ</b><br>Предварительный расчёт. Итоговые цифры зависят от документов по объекту.</p>
 </div>
 
 <div class="bar"><div class="in">
-  <span class="k" id="barK">Нужно доложить</span>
-  <span class="v need" id="barV">—</span>
+  <span class="k" id="barK">На руки после продажи</span>
+  <span class="v left" id="barV">—</span>
 </div></div>
 
 <script>
 (function(){
-  var ids=['sPrice','sDebt','sFee','sBuyPrice','sCad','bPrice','bCash','bExtra','mRate','mTerm'];
-  var fmtInts=['sPrice','sDebt','sBuyPrice','sCad','bPrice','bCash','bExtra'];
+  var ids=['sPrice','sDebt','sFee','sBuyPrice','sCad'];
+  var fmtInts=['sPrice','sDebt','sBuyPrice','sCad'];
 
   function num(id){
     var el=document.getElementById(id);
@@ -320,47 +275,15 @@ a.act.cta{display:block;text-align:center;text-decoration:none;background:var(--
 
     var net=price-debt-fee-tax;
 
-    var bPrice=num('bPrice'), cash=num('bCash'), extra=num('bExtra');
-    var need=bPrice+extra;
-    var gap=need-net-cash;
-
     document.getElementById('rPrice').textContent=money(price);
     document.getElementById('rDebt').textContent='− '+money(debt);
     document.getElementById('rFee').textContent='− '+money(fee);
     document.getElementById('rTax').textContent='− '+money(tax);
     document.getElementById('rNet').textContent=money(net);
     document.getElementById('taxNote').textContent=note;
-
-    document.getElementById('rNeed').textContent=money(need);
-    document.getElementById('rFrom').textContent='− '+money(net);
-    document.getElementById('rCash').textContent='− '+money(cash);
-
-    var big=document.getElementById('vBig'), lab=document.getElementById('vLab'), exp=document.getElementById('vExp');
-    var barK=document.getElementById('barK'), barV=document.getElementById('barV');
-    var payment=0;
-
-    if(gap>0){
-      var r=num('mRate')/100/12, n=num('mTerm')*12;
-      payment = (r>0&&n>0) ? gap*r/(1-Math.pow(1+r,-n)) : (n>0?gap/n:0);
-      lab.textContent='Не хватает';
-      big.textContent=money(gap);
-      big.style.color='var(--red)';
-      exp.textContent='Ипотека на эту сумму под '+num('mRate').toString().replace('.',',')+'% на '+num('mTerm')+' лет — платёж около '+money(payment)+' в месяц.';
-      barK.textContent='Нужно доложить';
-      barV.textContent=money(gap);
-      barV.className='v need';
-    }else{
-      lab.textContent='Остаётся свободных денег';
-      big.textContent=money(-gap);
-      big.style.color='var(--brass)';
-      exp.textContent='Ипотека не нужна: продажи и накоплений хватает на покупку целиком.';
-      barK.textContent='Остаётся на руках';
-      barV.textContent=money(-gap);
-      barV.className='v left';
-    }
-
-    last={price:price,debt:debt,fee:fee,tax:tax,net:net,need:need,cash:cash,gap:gap,pay:payment,exempt:exempt};
-    var msg='Здравствуйте! Посчитал альтернативную сделку на сайте: продаю за '+money(price)+', покупаю за '+money(bPrice)+', '+(gap>0?'не хватает '+money(gap):'остаётся '+money(-gap))+'. Хочу разобрать.';
+    document.getElementById('barV').textContent=money(net);
+    last={price:price,debt:debt,fee:fee,tax:tax,net:net,exempt:exempt};
+    var msg='Здравствуйте! Посчитал на сайте: продаю квартиру за '+money(price)+', на руки выходит '+money(net)+'. Хочу обсудить продажу.';
     document.getElementById('tgSend').href='https://t.me/schmidt_invest?text='+encodeURIComponent(msg);
   }
 
@@ -376,18 +299,13 @@ a.act.cta{display:block;text-align:center;text-decoration:none;background:var(--
 
   document.getElementById('copy').addEventListener('click',function(){
     var L=last, t=[];
-    t.push('РАСЧЁТ АЛЬТЕРНАТИВНОЙ СДЕЛКИ');
+    t.push('СКОЛЬКО ОСТАНЕТСЯ ПОСЛЕ ПРОДАЖИ');
     t.push('');
     t.push('Продажа: '+money(L.price));
     if(L.debt>0) t.push('Погашение ипотеки: −'+money(L.debt));
     t.push('Услуги эксперта: −'+money(L.fee));
     t.push('НДФЛ: '+(L.exempt?'0 ₽ (срок владения выдержан)':'−'+money(L.tax)));
     t.push('На руки после продажи: '+money(L.net));
-    t.push('');
-    t.push('Покупка с расходами: '+money(L.need));
-    t.push('Свои накопления: '+money(L.cash));
-    t.push(L.gap>0 ? 'Не хватает: '+money(L.gap)+' (платёж ≈ '+money(L.pay)+'/мес)'
-                   : 'Остаётся свободных денег: '+money(-L.gap));
     t.push('');
     t.push('Шмидт Капитал. Точность решает.');
     var s=t.join('\n'), b=this;
