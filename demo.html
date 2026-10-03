@@ -1,0 +1,423 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<!-- Yandex.Metrika counter -->
+<script type="text/javascript">
+  window.YM_ID = 112744291;
+  (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+  m[i].l=1*new Date();
+  for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+  k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+  (window, document, "script", "https://mc.yandex.ru/metrika/tag.js?id=112744291", "ym");
+  ym(112744291, "init", {ssr:true, webvisor:true, clickmap:true, ecommerce:"dataLayer", accurateTrackBounce:true, trackLinks:true});
+</script>
+<noscript><div><img src="https://mc.yandex.ru/watch/112744291" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Моя продажа — пример кабинета собственника · Шмидт Капитал</title>
+<meta name="description" content="Пример личного кабинета «Моя продажа»: гарантия срока 60 дней, показы, предложения по цене и юридическая проверка квартиры в одном месте.">
+<link rel="canonical" href="https://schmidtcapital.ru/demo.html">
+<meta name="theme-color" content="#121416">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://schmidtcapital.ru/demo.html">
+<meta property="og:title" content="Так вы будете видеть продажу своей квартиры">
+<meta property="og:description" content="Пример кабинета «Моя продажа» от «Шмидт Капитал»: гарантия 60 дней, каждый показ и каждое предложение онлайн.">
+<meta property="og:image" content="https://schmidtcapital.ru/jurgen.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* Layout: on desktop an explainer column beside a phone running the app; on a phone the app fills the screen. */
+:root{
+  --g0:#121416;--g1:#16181a;--g2:#1d2023;--g3:#24282c;--g4:#2c3136;
+  --brass:#b08d57;--brass-hi:#cfae78;--brass-dim:#6f5a3b;
+  --ink:#ece9e4;--soft:#c5c2bc;--muted:#8f959b;--line:#2c3136;
+  --ok:#5fae7f;--warn:#d6a648;--bad:#e0443e;
+  --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+  --sans:"Manrope",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  color-scheme:dark;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+@media (prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+html,body{height:100%}
+body{margin:0;background:var(--g0);color:var(--ink);font-family:var(--sans);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+button{font-family:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--brass);outline-offset:2px;border-radius:6px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;text-decoration:none;font-weight:600;font-size:15px;border-radius:8px;padding:13px 20px;border:1px solid var(--brass);background:var(--brass);color:var(--g1);cursor:pointer}
+.btn:hover{background:var(--brass-hi);border-color:var(--brass-hi)}
+.btn.ghost{background:transparent;color:var(--brass)}
+.btn.ghost:hover{background:rgba(176,141,87,.1)}
+
+/* page shell */
+.page{max-width:1180px;margin:0 auto;padding:40px 20px 60px;display:grid;grid-template-columns:1fr 400px;gap:72px;align-items:start;min-height:100%}
+.intro{position:sticky;top:40px;padding-top:30px}
+.eyebrow{font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--brass);font-weight:700;margin:0 0 16px}
+.intro h1{font-family:var(--serif);font-weight:500;font-size:clamp(40px,4.6vw,60px);line-height:1;margin:0;letter-spacing:-.01em;text-wrap:balance}
+.intro p{color:var(--soft);font-size:17px;max-width:46ch;margin:20px 0 0;line-height:1.6}
+.intro ul{list-style:none;margin:26px 0 30px;padding:0;border-top:1px solid var(--line);max-width:480px}
+.intro li{padding:13px 0 13px 18px;border-bottom:1px solid var(--line);position:relative;color:var(--soft);font-size:15px}
+.intro li::before{content:"";position:absolute;left:0;top:1.35em;width:8px;height:1px;background:var(--brass)}
+.intro li b{color:var(--ink)}
+.intro .acts{display:flex;flex-wrap:wrap;gap:10px}
+.intro .tel{margin-top:14px;font-size:14px;color:var(--muted)}
+.logo{display:inline-flex;align-items:center;gap:10px;text-decoration:none;margin-bottom:46px}
+.logo b{font-size:12.5px;letter-spacing:.16em;color:var(--brass);font-weight:700}
+
+/* phone */
+.phone{border:1px solid var(--line);border-radius:44px;background:#0b0c0d;padding:12px;box-shadow:0 40px 80px rgba(0,0,0,.45),0 0 0 1px rgba(176,141,87,.12)}
+.app{position:relative;height:820px;border-radius:34px;overflow:hidden;background:#151515;display:flex;flex-direction:column}
+
+/* app chrome */
+.demo-bar{background:var(--brass);color:var(--g1);font-size:12px;font-weight:600;text-align:center;padding:6px 12px}
+.a-top{display:flex;align-items:center;justify-content:space-between;padding:12px 16px;border-bottom:1px solid #262626}
+.a-brand{display:flex;align-items:center;gap:8px;font-size:11.5px;letter-spacing:.14em;font-weight:700;color:var(--brass)}
+.langs{display:flex;gap:2px;background:#1f1f1f;border-radius:999px;padding:3px}
+.langs button{border:0;background:none;color:var(--muted);font-size:11.5px;font-weight:700;padding:6px 10px;border-radius:999px;cursor:pointer;min-width:36px;min-height:30px}
+.langs button[aria-pressed="true"]{background:var(--brass);color:#151515}
+.scroll{flex:1;overflow-y:auto;overscroll-behavior:contain;padding:16px 16px 20px;display:flex;flex-direction:column;gap:12px;scrollbar-width:thin;scrollbar-color:#333 transparent}
+.view[hidden]{display:none!important}
+.view{display:flex;flex-direction:column;gap:12px;animation:fade .25s ease both}
+@keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+.h-addr small{display:block;font-size:12px;color:var(--muted)}
+.h-addr b{display:block;font-size:21px;font-weight:600;margin-top:2px}
+.h-addr span{font-size:12px;color:var(--muted)}
+.card{background:#1f1f1f;border-radius:16px;padding:14px}
+.card.brass{border:1px solid #3a3226}
+.lbl{font-size:10.5px;letter-spacing:.12em;font-weight:700;color:var(--brass);text-transform:uppercase}
+.muted{color:var(--muted)}
+
+/* guarantee ring */
+.g-card{display:flex;gap:16px;align-items:center}
+.ring{position:relative;width:118px;height:118px;flex:none}
+.ring svg{width:118px;height:118px;transform:rotate(-90deg)}
+.ring .num{position:absolute;inset:0;display:grid;place-content:center;text-align:center}
+.ring .num b{font-size:38px;line-height:1;font-variant-numeric:tabular-nums}
+.ring .num small{font-size:11px;color:var(--muted);margin-top:3px}
+.g-txt{display:flex;flex-direction:column;gap:6px}
+.g-txt p{margin:0;font-size:14px;line-height:1.4}
+.g-txt .fine{font-size:12px;color:var(--muted)}
+
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.stats div{background:#1f1f1f;border-radius:14px;padding:12px 10px}
+.stats b{display:block;font-size:20px;font-variant-numeric:tabular-nums}
+.stats span{display:block;font-size:11px;color:var(--muted);line-height:1.3;margin-top:3px}
+.stats .red b{color:var(--bad)}
+
+.stages{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:4px;margin-top:10px}
+.stages div{display:flex;flex-direction:column;gap:6px}
+.stages i{height:4px;border-radius:2px;background:#3a3a3a}
+.stages .done i{background:var(--brass)}
+.stages .now i{background:linear-gradient(90deg,var(--brass) 55%,#3a3a3a 55%)}
+.stages span{font-size:10px;color:#77736c;line-height:1.2}
+.stages .done span{color:var(--muted)}
+.stages .now span{color:var(--ink);font-weight:700}
+
+.row-link{display:flex;align-items:center;gap:12px;width:100%;text-align:left;border:0;color:var(--ink);cursor:pointer}
+.ico{width:42px;height:42px;border-radius:12px;background:#2e2a22;display:grid;place-items:center;flex:none}
+.ico svg{width:20px;height:20px;stroke:var(--brass);fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.row-link .t{flex:1;min-width:0}
+.row-link .t b{display:block;font-size:14.5px}
+.row-link .t span{display:block;font-size:12px;color:var(--muted)}
+.chev{width:16px;height:16px;stroke:var(--muted);fill:none;stroke-width:2}
+
+/* feed */
+.day{font-size:11px;letter-spacing:.12em;font-weight:700;color:#77736c;text-transform:uppercase;margin-top:4px}
+.ev-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.ev-head span{font-size:11.5px;color:var(--muted)}
+.ev b.ttl{display:block;font-size:15px;margin-bottom:4px}
+.ev p{margin:0;font-size:13px;color:#cfcac0;line-height:1.45}
+.video{height:132px;border-radius:12px;margin-bottom:10px;background:
+  linear-gradient(180deg,rgba(21,21,21,0) 40%,rgba(21,21,21,.85)),
+  repeating-linear-gradient(90deg,#2a2724 0 46px,#25221f 46px 92px);position:relative;display:grid;place-items:center}
+.video .play{width:44px;height:44px;border-radius:50%;background:var(--brass);display:grid;place-items:center}
+.video .play svg{width:16px;height:16px;fill:#151515;margin-left:3px}
+.video small{position:absolute;left:10px;bottom:8px;font-size:11px;color:var(--soft)}
+.ev.offer{border:1px solid #4a2426}
+.ev.offer .lbl{color:var(--bad)}
+.ev .sum{font-size:24px;font-weight:700;font-variant-numeric:tabular-nums;margin:2px 0 6px}
+.ev .sum s{font-size:14px;color:var(--muted);font-weight:500;margin-left:8px}
+.rec{margin:6px 0 0;font-size:13px;color:#cfcac0}
+.rec b{color:var(--ink)}
+.choice{display:flex;gap:8px;margin-top:10px}
+.choice button{flex:1;min-height:44px;border-radius:12px;font-size:14px;font-weight:600;cursor:pointer}
+.choice .no{border:1px solid #3a3a3a;background:transparent;color:var(--ink)}
+.choice .yes{border:0;background:var(--brass);color:#151515}
+.reply{margin-top:10px;font-size:12.5px;color:var(--ok);display:flex;gap:6px;align-items:flex-start}
+.mini-ev{display:flex;gap:12px;align-items:center}
+.mini-ev .t b{display:block;font-size:14px}
+.mini-ev .t span{font-size:12px;color:var(--muted)}
+
+/* checks */
+.score{display:flex;justify-content:space-between;align-items:baseline}
+.score b{font-size:15px}
+.score em{font-style:normal;font-size:22px;font-weight:700;color:var(--ok);font-variant-numeric:tabular-nums}
+.bars{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:3px;margin:12px 0 8px}
+.bars i{height:8px;border-radius:2px;background:var(--ok)}
+.bars i.w{background:var(--warn)}.bars i.p{background:#3a3a3a}
+.checks{list-style:none;margin:0;padding:2px 14px;background:#1f1f1f;border-radius:16px}
+.checks li{display:flex;align-items:center;gap:10px;padding:11px 0;border-bottom:1px solid #2a2a2a;font-size:13.5px}
+.checks li:last-child{border-bottom:0}
+.dot{width:9px;height:9px;border-radius:50%;flex:none;background:var(--ok)}
+.dot.w{background:var(--warn)}.dot.p{background:#4a4a4a}
+.checks .n{flex:1;min-width:0}
+.checks .s{font-size:11.5px;color:var(--ok);white-space:nowrap}
+.checks .s.w{color:var(--warn)}.checks .s.p{color:#8a867f}
+
+/* report */
+.rep-top{text-align:center;padding:18px 14px}
+.rep-top .lbl{display:block;margin-bottom:6px}
+.rep-top b{display:block;font-family:var(--serif);font-size:64px;line-height:1;color:var(--brass);font-weight:600}
+.rep-top span{font-size:13px;color:var(--muted)}
+.lines{list-style:none;margin:0;padding:4px 14px;background:#1f1f1f;border-radius:16px}
+.lines li{display:flex;justify-content:space-between;gap:12px;padding:11px 0;border-bottom:1px solid #2a2a2a;font-size:13.5px}
+.lines li:last-child{border-bottom:0}
+.lines li span{color:var(--muted)}
+.lines li b{font-variant-numeric:tabular-nums;text-align:right}
+.lines li.total b{color:var(--brass);font-size:16px}
+.note{font-size:11.5px;color:var(--muted);text-align:center;margin:0}
+
+/* tab bar */
+.tabs{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));border-top:1px solid #262626;padding:4px 6px calc(8px + env(safe-area-inset-bottom,0px));background:#151515}
+.tabs button{border:0;background:none;color:#8a867f;display:flex;flex-direction:column;align-items:center;gap:3px;padding:8px 0;font-size:11px;font-weight:600;cursor:pointer;min-height:52px}
+.tabs svg{width:21px;height:21px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.tabs button[aria-selected="true"]{color:var(--brass)}
+
+/* below-app CTA for phones */
+.m-cta{display:none}
+
+@media (max-width:900px){
+  .page{grid-template-columns:1fr;gap:0;padding:0}
+  .intro{display:none}
+  .phone{border:0;border-radius:0;padding:0;box-shadow:none;background:none}
+  .app{height:100vh;height:100dvh;border-radius:0}
+  .m-cta{display:flex;gap:8px;padding:10px 12px;background:#151515;border-top:1px solid #262626}
+  .m-cta .btn{flex:1;padding:11px 10px;font-size:14px;white-space:nowrap}
+  .m-cta .btn.ghost{flex:0 0 auto;padding:11px 16px}
+}
+</style>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="logo" viewBox="0 0 40 44">
+    <path d="M20 2 L36 11 L36 33 L20 42 L4 33 L4 11 Z" fill="none" stroke="#b08d57" stroke-width="2.4"/>
+    <path d="M20 6.4 L32.2 13.3 L32.2 30.7 L20 37.6 L7.8 30.7 L7.8 13.3 Z" fill="none" stroke="#b08d57" stroke-width="1"/>
+    <g fill="#b08d57"><rect x="12" y="14" width="2.8" height="11"/><rect x="18.6" y="14" width="2.8" height="11"/><rect x="25.2" y="14" width="2.8" height="11"/><rect x="12" y="25" width="16" height="2.8"/></g>
+  </symbol>
+</svg>
+
+<div class="page">
+  <aside class="intro">
+    <a class="logo" href="/"><svg width="26" height="29"><use href="#logo"/></svg><b>ШМИДТ КАПИТАЛ</b></a>
+    <p class="eyebrow">Пример кабинета «Моя продажа»</p>
+    <h1>Так вы будете видеть продажу своей квартиры</h1>
+    <p>Справа — живой пример. Нажимайте вкладки внизу экрана: так выглядит кабинет, который получает каждый собственник, продающий с гарантией срока.</p>
+    <ul>
+      <li><b>Счётчик гарантии.</b> 60 дней на продажу, иначе комиссия 1,5% вместо 3%.</li>
+      <li><b>Лента продажи.</b> Видео с показов, отзывы покупателей, предложения по цене.</li>
+      <li><b>Юридическая проверка.</b> 12 пунктов и статус каждого документа.</li>
+      <li><b>Русский, немецкий, английский.</b> Можно показать родственникам за границей.</li>
+    </ul>
+    <div class="acts">
+      <a class="btn js-tg" data-msg="Здравствуйте, Юрген! Посмотрел пример кабинета. Хочу проверить, подходит ли моя квартира под гарантию 60 дней. Адрес: " href="https://t.me/schmidt_invest" target="_blank" rel="noopener">Проверить мою квартиру</a>
+      <a class="btn ghost" href="garantiya.html">Условия гарантии</a>
+    </div>
+    <p class="tel">Телефон: +7 995 509-17-76</p>
+  </aside>
+
+  <div class="phone">
+    <div class="app" id="app">
+      <div class="demo-bar" data-i="demo">Демо-пример · цифры условные</div>
+      <div class="a-top">
+        <div class="a-brand"><svg width="20" height="22" aria-hidden="true"><use href="#logo"/></svg><span>ШМИДТ КАПИТАЛ</span></div>
+        <div class="langs" role="group" aria-label="Язык">
+          <button type="button" data-lang="ru" aria-pressed="true">RU</button>
+          <button type="button" data-lang="de" aria-pressed="false">DE</button>
+          <button type="button" data-lang="en" aria-pressed="false">EN</button>
+        </div>
+      </div>
+
+      <div class="scroll" id="scroll">
+
+        <!-- HOME -->
+        <section class="view" id="v-home" role="tabpanel" aria-labelledby="t-home">
+          <div class="h-addr"><small data-i="yourFlat">Ваша квартира в продаже</small><b data-i="flat">3 комнаты, ЮАО</b><span data-i="agent">Ведёт Юрген Шмидт</span></div>
+          <div class="card brass g-card">
+            <div class="ring" aria-hidden="true">
+              <svg viewBox="0 0 118 118"><circle cx="59" cy="59" r="52" fill="none" stroke="#2c2c2c" stroke-width="9"/><circle id="arc" cx="59" cy="59" r="52" fill="none" stroke="#b08d57" stroke-width="9" stroke-linecap="round" stroke-dasharray="0 326.7" style="transition:stroke-dasharray 1.2s cubic-bezier(.2,.7,.2,1)"/></svg>
+              <div class="num"><b id="daysLeft">41</b><small data-i="ofDays">день из 60</small></div>
+            </div>
+            <div class="g-txt">
+              <span class="lbl" data-i="gLbl">Гарантия срока</span>
+              <p data-i="gTxt">Продадим до 13 ноября по согласованной цене</p>
+              <span class="fine" data-i="gFine">Не успеем — комиссия 1,5% вместо 3%. Условия в договоре.</span>
+            </div>
+          </div>
+          <div class="stats">
+            <div><b>1 284</b><span data-i="sViews">просмотра объявления</span></div>
+            <div><b>9</b><span data-i="sShows">показов квартиры</span></div>
+            <div class="red"><b>2</b><span data-i="sOffers">предложения по цене</span></div>
+          </div>
+          <div class="card">
+            <span class="muted" style="font-size:12.5px" data-i="stage">Этап продажи</span>
+            <div class="stages">
+              <div class="done"><i></i><span data-i="st1">Проверка</span></div>
+              <div class="done"><i></i><span data-i="st2">Реклама</span></div>
+              <div class="now"><i></i><span data-i="st3">Показы</span></div>
+              <div><i></i><span data-i="st4">Торг</span></div>
+              <div><i></i><span data-i="st5">Сделка</span></div>
+              <div><i></i><span data-i="st6">Деньги</span></div>
+            </div>
+          </div>
+          <button type="button" class="card row-link" data-go="feed">
+            <span class="ico"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg></span>
+            <span class="t"><b data-i="nextShow">Показ завтра, 12:00</b><span data-i="nextShowSub">Пара, ипотека одобрена · видео после показа</span></span>
+            <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
+          </button>
+          <button type="button" class="card row-link" data-go="checks">
+            <span class="ico"><svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6Z"/><path d="m9 12 2 2 4-4"/></svg></span>
+            <span class="t"><b data-i="legalRow">Юридическая чистота: 10 из 12</b><span data-i="legalRowSub">Ещё 2 проверки в работе</span></span>
+            <svg class="chev" viewBox="0 0 24 24" aria-hidden="true"><path d="m9 6 6 6-6 6"/></svg>
+          </button>
+        </section>
+
+        <!-- FEED -->
+        <section class="view" id="v-feed" role="tabpanel" aria-labelledby="t-feed" hidden>
+          <div class="day" data-i="today">Сегодня</div>
+          <article class="card ev">
+            <div class="ev-head"><span class="lbl" data-i="show">Показ</span><span>14:30</span></div>
+            <div class="video" role="img" aria-label="Видео с показа"><span class="play"><svg viewBox="0 0 16 16"><path d="M3 1.5v13l11-6.5Z"/></svg></span><small data-i="video">Видео с показа · 0:48</small></div>
+            <b class="ttl" data-i="showTtl">Семья с ребёнком, ипотека одобрена</b>
+            <p data-i="showTxt">Понравились планировка и школа рядом. Сомневаются из-за кухни, обсудят вечером. Ответ обещали до пятницы.</p>
+          </article>
+          <article class="card ev offer" id="offer">
+            <div class="ev-head"><span class="lbl" data-i="offerLbl">Предложение по цене</span><span>11:05</span></div>
+            <div class="sum">21 900 000 ₽<s>22 500 000 ₽</s></div>
+            <p class="rec"><b data-i="recB">Рекомендация Юргена:</b> <span data-i="rec">пока не принимать. До конца гарантии 41 день, интерес к квартире выше среднего.</span></p>
+            <div class="choice">
+              <button type="button" class="no" data-ans="talk" data-i="talk">Обсудить</button>
+              <button type="button" class="yes" data-ans="ok" data-i="agree">Согласен</button>
+            </div>
+            <div class="reply" id="reply" hidden><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" aria-hidden="true"><path d="m5 12 5 5 9-10"/></svg><span id="replyTxt"></span></div>
+          </article>
+          <div class="day" data-i="yesterday">Вчера</div>
+          <article class="card mini-ev">
+            <span class="ico"><svg viewBox="0 0 24 24"><path d="M4 18 10 12l4 4 6-8"/><path d="M15 8h5v5"/></svg></span>
+            <span class="t"><b data-i="topTtl">Объявление поднято в топ</b><span data-i="topTxt">+212 просмотров за сутки</span></span>
+          </article>
+          <article class="card mini-ev">
+            <span class="ico"><svg viewBox="0 0 24 24"><path d="M6 3h8l4 4v14H6Z"/><path d="M14 3v4h4M9 13h6M9 17h6"/></svg></span>
+            <span class="t"><b data-i="docTtl">Получена выписка ЕГРН</b><span data-i="docTxt">Обременений нет · файл в разделе «Проверка»</span></span>
+          </article>
+        </section>
+
+        <!-- CHECKS -->
+        <section class="view" id="v-checks" role="tabpanel" aria-labelledby="t-checks" hidden>
+          <div class="card">
+            <div class="score"><b data-i="ready">Квартира почти готова к сделке</b><em>10/12</em></div>
+            <div class="bars" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i></i><i class="w"></i><i class="p"></i></div>
+            <span class="muted" style="font-size:12px" data-i="readySub">Покупатель видит те же зелёные отметки. Это снимает его страх и ускоряет решение.</span>
+          </div>
+          <ul class="checks" id="checkList"></ul>
+        </section>
+
+        <!-- REPORT -->
+        <section class="view" id="v-report" role="tabpanel" aria-labelledby="t-report" hidden>
+          <div class="card rep-top">
+            <span class="lbl" data-i="repLbl">Итоговый отчёт · пример</span>
+            <b>30</b>
+            <span data-i="repDays">дней от выхода на рынок до сделки</span>
+          </div>
+          <ul class="lines">
+            <li><span data-i="rPrice">Цена продажи</span><b>25 600 000 ₽</b></li>
+            <li><span data-i="rShows">Показов</span><b>11</b></li>
+            <li><span data-i="rOffers">Предложений по цене</span><b>3</b></li>
+            <li><span data-i="rFee">Комиссия, продано в срок (3%)</span><b>768 000 ₽</b></li>
+            <li class="total"><span data-i="rNet">Вы получили до налога</span><b>24 832 000 ₽</b></li>
+          </ul>
+          <p class="note" data-i="repNote">Пример по реальной сделке: трёшка у м. Борисово, альтернативная продажа.</p>
+        </section>
+
+      </div>
+
+      <nav class="tabs" role="tablist" aria-label="Разделы">
+        <button type="button" role="tab" id="t-home" aria-selected="true" aria-controls="v-home" data-tab="home"><svg viewBox="0 0 24 24"><path d="M3 11 12 4l9 7v9H3Z"/></svg><span data-i="tHome">Главная</span></button>
+        <button type="button" role="tab" id="t-feed" aria-selected="false" aria-controls="v-feed" data-tab="feed"><svg viewBox="0 0 24 24"><path d="M4 6h16M4 12h16M4 18h10"/></svg><span data-i="tFeed">Лента</span></button>
+        <button type="button" role="tab" id="t-checks" aria-selected="false" aria-controls="v-checks" data-tab="checks"><svg viewBox="0 0 24 24"><path d="M12 3 4 6v6c0 5 3.5 8 8 9 4.5-1 8-4 8-9V6Z"/><path d="m9 12 2 2 4-4"/></svg><span data-i="tChecks">Проверка</span></button>
+        <button type="button" role="tab" id="t-report" aria-selected="false" aria-controls="v-report" data-tab="report"><svg viewBox="0 0 24 24"><path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/></svg><span data-i="tReport">Итог</span></button>
+      </nav>
+      <div class="m-cta">
+        <a class="btn js-tg" data-msg="Здравствуйте, Юрген! Посмотрел пример кабинета. Хочу проверить, подходит ли моя квартира под гарантию 60 дней. Адрес: " href="https://t.me/schmidt_invest" target="_blank" rel="noopener" data-i="ctaCheck">Проверить мою квартиру</a>
+        <a class="btn ghost" href="garantiya.html" data-i="ctaTerms">Условия</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+var T = {
+  ru:{demo:"Демо-пример · цифры условные",yourFlat:"Ваша квартира в продаже",flat:"3 комнаты, ЮАО",agent:"Ведёт Юрген Шмидт",ofDays:"день из 60",gLbl:"Гарантия срока",gTxt:"Продадим до 13 ноября по согласованной цене",gFine:"Не успеем — комиссия 1,5% вместо 3%. Условия в договоре.",sViews:"просмотра объявления",sShows:"показов квартиры",sOffers:"предложения по цене",stage:"Этап продажи",st1:"Проверка",st2:"Реклама",st3:"Показы",st4:"Торг",st5:"Сделка",st6:"Деньги",nextShow:"Показ завтра, 12:00",nextShowSub:"Пара, ипотека одобрена · видео после показа",legalRow:"Юридическая чистота: 10 из 12",legalRowSub:"Ещё 2 проверки в работе",today:"Сегодня",show:"Показ",video:"Видео с показа · 0:48",showTtl:"Семья с ребёнком, ипотека одобрена",showTxt:"Понравились планировка и школа рядом. Сомневаются из-за кухни, обсудят вечером. Ответ обещали до пятницы.",offerLbl:"Предложение по цене",recB:"Рекомендация Юргена:",rec:"пока не принимать. До конца гарантии 41 день, интерес к квартире выше среднего.",talk:"Обсудить",agree:"Согласен",ansTalk:"Юрген получит запрос и позвонит вам. В демо ответ никуда не отправляется.",ansOk:"Юрген получит ваше согласие и начнёт оформление. В демо ответ никуда не отправляется.",yesterday:"Вчера",topTtl:"Объявление поднято в топ",topTxt:"+212 просмотров за сутки",docTtl:"Получена выписка ЕГРН",docTxt:"Обременений нет · файл в разделе «Проверка»",ready:"Квартира почти готова к сделке",readySub:"Покупатель видит те же зелёные отметки. Это снимает его страх и ускоряет решение.",ok:"чисто",req:"запрошена",wip:"в работе",repLbl:"Итоговый отчёт · пример",repDays:"дней от выхода на рынок до сделки",rPrice:"Цена продажи",rShows:"Показов",rOffers:"Предложений по цене",rFee:"Комиссия, продано в срок (3%)",rNet:"Вы получили до налога",repNote:"Пример по реальной сделке: трёшка у м. Борисово, альтернативная продажа.",tHome:"Главная",tFeed:"Лента",tChecks:"Проверка",tReport:"Итог",ctaCheck:"Проверить мою квартиру",ctaTerms:"Условия",
+    checks:["Право собственности, выписка ЕГРН","История переходов права","Аресты и обременения","Зарегистрированные в квартире","Согласие супруга на продажу","Несовершеннолетние и опека","Материнский капитал","Перепланировка","Долги по ЖКУ","Банкротство продавца","Дееспособность продавца","Наследственные риски"]},
+  de:{demo:"Demo · Beispielzahlen",yourFlat:"Ihre Wohnung im Verkauf",flat:"3 Zimmer, Moskau Süd",agent:"Betreut von Jürgen Schmidt",ofDays:"Tag von 60",gLbl:"Verkaufsgarantie",gTxt:"Verkauf bis 13. November zum vereinbarten Preis",gFine:"Schaffen wir es nicht, beträgt die Provision 1,5 % statt 3 %. Laut Vertrag.",sViews:"Aufrufe der Anzeige",sShows:"Besichtigungen",sOffers:"Preisangebote",stage:"Verkaufsphase",st1:"Prüfung",st2:"Werbung",st3:"Besichtig.",st4:"Verhandl.",st5:"Vertrag",st6:"Geld",nextShow:"Besichtigung morgen, 12:00",nextShowSub:"Paar, Hypothek bewilligt · Video danach",legalRow:"Rechtliche Prüfung: 10 von 12",legalRowSub:"2 Prüfungen laufen noch",today:"Heute",show:"Besichtigung",video:"Video der Besichtigung · 0:48",showTtl:"Familie mit Kind, Hypothek bewilligt",showTxt:"Grundriss und Schule in der Nähe gefallen. Die Küche ist ihnen etwas klein, sie beraten heute Abend. Antwort bis Freitag.",offerLbl:"Preisangebot",recB:"Empfehlung von Jürgen:",rec:"noch nicht annehmen. Bis zum Ende der Garantie sind es 41 Tage, das Interesse ist überdurchschnittlich.",talk:"Besprechen",agree:"Annehmen",ansTalk:"Jürgen erhält Ihre Anfrage und ruft Sie an. In der Demo wird nichts gesendet.",ansOk:"Jürgen erhält Ihre Zustimmung und bereitet alles vor. In der Demo wird nichts gesendet.",yesterday:"Gestern",topTtl:"Anzeige nach oben gesetzt",topTxt:"+212 Aufrufe in 24 Stunden",docTtl:"Grundbuchauszug erhalten",docTxt:"Keine Belastungen · Datei unter „Prüfung“",ready:"Die Wohnung ist fast bereit für den Verkauf",readySub:"Käufer sehen dieselben grünen Haken. Das nimmt ihnen die Sorge und beschleunigt die Entscheidung.",ok:"sauber",req:"angefordert",wip:"in Arbeit",repLbl:"Abschlussbericht · Beispiel",repDays:"Tage vom Marktstart bis zum Vertrag",rPrice:"Verkaufspreis",rShows:"Besichtigungen",rOffers:"Preisangebote",rFee:"Provision, fristgerecht (3 %)",rNet:"Ihr Erlös vor Steuern",repNote:"Beispiel aus einem echten Verkauf: 3 Zimmer, Moskau Süd, Kettengeschäft.",tHome:"Start",tFeed:"Verlauf",tChecks:"Prüfung",tReport:"Bericht",ctaCheck:"Meine Wohnung prüfen",ctaTerms:"Bedingungen",
+    checks:["Eigentumsrecht, Grundbuchauszug","Eigentümerhistorie","Pfändungen und Belastungen","Gemeldete Personen","Zustimmung des Ehepartners","Minderjährige und Vormundschaft","Mütterkapital","Umbauten","Nebenkostenschulden","Insolvenz des Verkäufers","Geschäftsfähigkeit des Verkäufers","Erbrechtliche Risiken"]},
+  en:{demo:"Demo · sample figures",yourFlat:"Your apartment for sale",flat:"3 rooms, South Moscow",agent:"Managed by Jürgen Schmidt",ofDays:"day of 60",gLbl:"Sale guarantee",gTxt:"Sold by 13 November at the agreed price",gFine:"If we miss it, the fee drops from 3% to 1.5%. Set out in the contract.",sViews:"listing views",sShows:"viewings",sOffers:"price offers",stage:"Sale stage",st1:"Audit",st2:"Ads",st3:"Viewings",st4:"Talks",st5:"Deal",st6:"Money",nextShow:"Viewing tomorrow, 12:00",nextShowSub:"Couple, mortgage approved · video afterwards",legalRow:"Legal check: 10 of 12",legalRowSub:"2 checks in progress",today:"Today",show:"Viewing",video:"Viewing video · 0:48",showTtl:"Family with a child, mortgage approved",showTxt:"They liked the layout and the school nearby. The kitchen worries them, they will decide tonight. Answer promised by Friday.",offerLbl:"Price offer",recB:"Jürgen recommends:",rec:"don't accept yet. 41 days left on the guarantee and interest is above average.",talk:"Discuss",agree:"Accept",ansTalk:"Jürgen gets your request and will call you. Nothing is sent in this demo.",ansOk:"Jürgen gets your approval and starts the paperwork. Nothing is sent in this demo.",yesterday:"Yesterday",topTtl:"Listing boosted to the top",topTxt:"+212 views in 24 hours",docTtl:"Title register extract received",docTxt:"No encumbrances · file under “Checks”",ready:"The apartment is almost ready to sell",readySub:"Buyers see the same green marks. It removes their doubts and speeds up the decision.",ok:"clear",req:"requested",wip:"in progress",repLbl:"Final report · example",repDays:"days from listing to deal",rPrice:"Sale price",rShows:"Viewings",rOffers:"Price offers",rFee:"Fee, sold on time (3%)",rNet:"You received before tax",repNote:"Example from a real sale: 3 rooms, South Moscow, chain transaction.",tHome:"Home",tFeed:"Feed",tChecks:"Checks",tReport:"Report",ctaCheck:"Check my apartment",ctaTerms:"Terms",
+    checks:["Ownership, title register extract","Ownership history","Seizures and encumbrances","Registered residents","Spouse's consent","Minors and guardianship","Maternity capital","Alterations","Utility debts","Seller bankruptcy","Seller's legal capacity","Inheritance risks"]}
+};
+var STATUS = ["ok","ok","ok","req","ok","ok","ok","ok","wip","ok","ok","ok"];
+var lang = "ru", answer = null;
+
+function applyLang(l){
+  lang = l; var d = T[l];
+  document.querySelectorAll("#app [data-i]").forEach(function(el){ var k = el.getAttribute("data-i"); if (d[k] != null) el.textContent = d[k]; });
+  document.querySelectorAll(".langs button").forEach(function(b){ b.setAttribute("aria-pressed", b.getAttribute("data-lang") === l); });
+  var ul = document.getElementById("checkList"); ul.innerHTML = "";
+  d.checks.forEach(function(name, i){
+    var st = STATUS[i], cls = st === "ok" ? "" : (st === "req" ? "w" : "p");
+    var li = document.createElement("li");
+    li.innerHTML = '<span class="dot ' + cls + '"></span><span class="n"></span><span class="s ' + cls + '"></span>';
+    li.querySelector(".n").textContent = name;
+    li.querySelector(".s").textContent = d[st];
+    ul.appendChild(li);
+  });
+  if (answer) document.getElementById("replyTxt").textContent = d[answer === "ok" ? "ansOk" : "ansTalk"];
+  try { localStorage.setItem("demo_lang", l); } catch(_){}
+}
+document.querySelectorAll(".langs button").forEach(function(b){ b.addEventListener("click", function(){ applyLang(b.getAttribute("data-lang")); }); });
+
+function go(tab){
+  document.querySelectorAll(".tabs button").forEach(function(b){ b.setAttribute("aria-selected", b.getAttribute("data-tab") === tab); });
+  document.querySelectorAll(".view").forEach(function(v){ v.hidden = v.id !== "v-" + tab; });
+  document.getElementById("scroll").scrollTop = 0;
+  if (window.ym) { try { ym(window.YM_ID, "reachGoal", "demo_tab_" + tab); } catch(_){} }
+}
+document.querySelectorAll(".tabs button").forEach(function(b){ b.addEventListener("click", function(){ go(b.getAttribute("data-tab")); }); });
+document.querySelectorAll("[data-go]").forEach(function(b){ b.addEventListener("click", function(){ go(b.getAttribute("data-go")); }); });
+
+document.querySelectorAll("[data-ans]").forEach(function(b){
+  b.addEventListener("click", function(){
+    answer = b.getAttribute("data-ans");
+    document.getElementById("reply").hidden = false;
+    document.getElementById("replyTxt").textContent = T[lang][answer === "ok" ? "ansOk" : "ansTalk"];
+  });
+});
+
+/* кольцо гарантии: 41 день осталось из 60 */
+requestAnimationFrame(function(){ setTimeout(function(){ var c = 2 * Math.PI * 52; document.getElementById("arc").setAttribute("stroke-dasharray", (c * 41 / 60).toFixed(1) + " " + c.toFixed(1)); }, 150); });
+
+var TG = "schmidt_invest";
+document.querySelectorAll(".js-tg").forEach(function(a){ a.href = "https://t.me/" + TG + "?text=" + encodeURIComponent(a.getAttribute("data-msg")); });
+
+var saved = null; try { saved = localStorage.getItem("demo_lang"); } catch(_){}
+applyLang(T[saved] ? saved : "ru");
+</script>
+<script>
+document.addEventListener("click", function(e){
+  var a = e.target.closest && e.target.closest('a[href*="t.me/"]');
+  if (a && window.ym) { try { ym(window.YM_ID, "reachGoal", "tg_click"); ym(window.YM_ID, "reachGoal", "demo_tg"); } catch(_){} }
+}, true);
+</script>
+</body>
+</html>
