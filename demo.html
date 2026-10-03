@@ -411,7 +411,8 @@ var TG = "schmidt_invest";
 document.querySelectorAll(".js-tg").forEach(function(a){ a.href = "https://t.me/" + TG + "?text=" + encodeURIComponent(a.getAttribute("data-msg")); });
 
 var saved = null; try { saved = localStorage.getItem("demo_lang"); } catch(_){}
-applyLang(T[saved] ? saved : "ru");
+var hl = (location.hash || "").slice(1);
+applyLang(T[hl] ? hl : (T[saved] ? saved : "ru"));
 </script>
 <script>
 document.addEventListener("click", function(e){
