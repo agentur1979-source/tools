@@ -327,6 +327,46 @@ footer{border-top:1px solid var(--line);padding:30px 0 40px;color:var(--muted);f
 footer .wrap{display:flex;justify-content:space-between;gap:14px 20px;flex-wrap:wrap;align-items:center}
 footer b{color:var(--brass);font-family:var(--serif);font-size:22px;font-weight:600}
 
+/* phone in header */
+.tel-top{display:flex;align-items:center;gap:8px;color:var(--ink);text-decoration:none;font-weight:600;font-size:14.5px;white-space:nowrap}
+.tel-top svg{width:18px;height:18px;stroke:var(--brass);fill:none;stroke-width:1.8}
+.tel-top:hover{color:var(--brass-hi)}
+@media (max-width:1100px){.tel-top span{display:none}.tel-top{padding:8px;border:1px solid var(--line);border-radius:6px}}
+.hero-note{margin:14px 0 0;color:var(--muted);font-size:14.5px}
+.hero-note a{color:var(--ink);font-weight:600;text-decoration:none;border-bottom:1px solid var(--brass-dim)}
+
+/* price */
+.price{display:grid;grid-template-columns:1.2fr 1fr 1fr;margin-top:28px;border:1px solid var(--brass-dim);background:var(--g2)}
+.price>div{padding:26px 26px 24px;border-left:1px solid var(--line)}
+.price>div:first-child{border-left:0}
+.price small{display:block;color:var(--muted);font-size:12.5px;letter-spacing:.1em;text-transform:uppercase;margin-bottom:10px}
+.price b{display:block;font-family:var(--serif);font-size:44px;line-height:1;color:var(--brass);font-weight:600}
+.price p{margin:10px 0 0;color:#c5c2bc;font-size:14.5px;line-height:1.5}
+@media (max-width:900px){.price{grid-template-columns:1fr}.price>div{border-left:0;border-top:1px solid var(--line)}.price>div:first-child{border-top:0}}
+
+/* lead form */
+.lead{margin-top:28px;background:var(--g2);border:1px solid var(--brass-dim);padding:24px}
+.lead fieldset{border:0;margin:0 0 18px;padding:0}
+.lead legend{font-size:13px;color:var(--muted);letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chips label{cursor:pointer}
+.chips input{position:absolute;opacity:0;pointer-events:none}
+.chips span{display:inline-block;padding:9px 14px;border:1px solid var(--line);border-radius:999px;font-size:14.5px;font-weight:600;color:#c5c2bc;transition:border-color .15s,background .15s}
+.chips input:checked+span{background:var(--brass);border-color:var(--brass);color:var(--g1)}
+.chips input:focus-visible+span{outline:2px solid var(--brass);outline-offset:2px}
+.lead .f{display:block;margin-bottom:12px}
+.lead .f span{display:block;font-size:13.5px;color:var(--muted);margin-bottom:6px}
+.lead input[type=text],.lead input[type=tel],.lead textarea{width:100%;background:var(--g0);border:1px solid var(--line);border-radius:6px;color:var(--ink);font:500 16px var(--sans);padding:13px 14px}
+.lead textarea{min-height:76px;resize:vertical}
+.lead input:focus,.lead textarea:focus{outline:none;border-color:var(--brass)}
+.lead .err{border-color:var(--red)!important}
+.lead .send{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:6px}
+.lead .send .btn{width:100%;cursor:pointer;font-family:inherit}
+.lead .hint{font-size:13px;color:var(--muted);margin:12px 0 0;line-height:1.45}
+.lead .ok{display:none;margin:12px 0 0;padding:12px 14px;border-left:3px solid var(--brass);background:var(--g0);font-size:14.5px}
+.lead .ok.show{display:block}
+@media (max-width:480px){.lead{padding:18px}.lead .send{grid-template-columns:1fr}}
+
 .sticky-cta{display:none}
 @media (max-width:700px){
   .sticky-cta{display:flex;position:fixed;transform:translateY(140%);transition:transform .25s;left:12px;right:12px;bottom:calc(12px + env(safe-area-inset-bottom));z-index:30;box-shadow:0 8px 24px rgba(0,0,0,.45)}
@@ -346,6 +386,8 @@ footer b{color:var(--brass);font-family:var(--serif);font-size:22px;font-weight:
 .langsw a[aria-current="true"]{color:var(--brass)}
 @media (max-width:900px){.langsw{margin-left:auto}.top .menu-btn{margin-left:4px}}
 @media (max-width:480px){.top .wrap{gap:10px}.langsw a{padding:6px 5px}.logo{gap:8px}.logo b{font-size:12px;letter-spacing:.1em}.top .menu-btn{padding:7px 10px}}
+
+@media (max-width:480px){.top .wrap{gap:6px}.top .tel-top{padding:6px}.tel-top svg{width:16px;height:16px}.top .langsw a{padding:6px 3px}.top .wrap .menu-btn{padding:7px 8px;font-size:13px;margin-left:2px}.top .logo{gap:7px}.top .logo b{font-size:11px;letter-spacing:.06em}.top .logo svg{width:26px;height:29px}}
 </style>
 </head>
 <body>
@@ -373,6 +415,7 @@ footer b{color:var(--brass);font-family:var(--serif);font-size:22px;font-weight:
       <a href="#contact">Контакты</a>
     </nav>
     <div class="langsw" role="group" aria-label="Язык / Sprache / Language"><a href="/" hreflang="ru" lang="ru" aria-current="true">RU</a><a href="/de/" hreflang="de" lang="de">DE</a><a href="/en/" hreflang="en" lang="en">EN</a></div>
+    <a class="tel-top" href="tel:+79955091776" aria-label="Позвонить: +7 995 509-17-76"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1.9.4 1.8.7 2.7a2 2 0 0 1-.5 2.1L8 9.8a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.5c.9.3 1.8.6 2.7.7a2 2 0 0 1 1.7 2z"/></svg><span>+7 995 509-17-76</span></a>
     <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-controls="nav">Меню</button>
     <a class="btn sm" href="https://t.me/schmidt_invest" target="_blank" rel="noopener">Написать</a>
   </div>
@@ -391,9 +434,10 @@ footer b{color:var(--brass);font-family:var(--serif);font-size:22px;font-weight:
         <span class="arr" aria-hidden="true">→</span>
       </a>
       <div class="actions">
-        <a class="btn js-tg" data-msg="Здравствуйте, Юрген! Хочу обсудить сделку." href="https://t.me/schmidt_invest" target="_blank" rel="noopener">Обсудить сделку в Telegram</a>
-        <a class="btn ghost" href="#objects">Закрытые объекты</a>
+        <a class="btn js-task" data-task="Бесплатная оценка" href="#zayavka">Бесплатная оценка квартиры</a>
+        <a class="btn ghost js-task" data-task="Покупаю" href="#zayavka">Хочу купить</a>
       </div>
+      <p class="hero-note">Отвечаю лично. Удобнее голосом — <a href="tel:+79955091776">+7 995 509-17-76</a></p>
       <div class="who">
         <div><b>Вторичный рынок</b>Москва</div>
         <div><b>Новостройки</b>Москва и область</div>
@@ -482,6 +526,11 @@ footer b{color:var(--brass);font-family:var(--serif);font-size:22px;font-weight:
         <p>Для тех, кто живёт в другом городе или стране: видеопоказы, проверка документов, электронная подпись и отчёт на каждом шаге.</p>
         <a class="js-tg" data-msg="Здравствуйте! Хочу купить квартиру в Москве удалённо." href="https://t.me/schmidt_invest" target="_blank" rel="noopener">Узнать, как это устроено</a>
       </article>
+    </div>
+    <div class="price" id="price">
+      <div><small>Продажа квартиры</small><b>3%</b><p>От цены продажи. Оплата только после сделки — до неё вы не платите ничего.</p></div>
+      <div><small>С гарантией 60 дней</small><b>1,5%</b><p>Если не продали за 60 дней — комиссия вдвое меньше. <a href="garantiya.html" style="color:var(--brass)">Условия →</a></p></div>
+      <div><small>Покупка и проверка</small><b>по задаче</b><p>Называем стоимость после первого разговора — до начала работы, без сюрпризов.</p></div>
     </div>
   </div>
 </section>
@@ -643,8 +692,29 @@ footer b{color:var(--brass);font-family:var(--serif);font-size:22px;font-weight:
 <section class="contact grid-bg" id="contact">
   <div class="wrap">
     <div>
-      <h2>Расскажите о своей задаче</h2>
-      <p>Напишите пару строк о квартире или доме. Отвечаю лично и говорю прямо, где риск и что с ним делать.</p>
+      <h2>Оставьте заявку</h2>
+      <p>Заполните за 30 секунд — заявка уйдёт мне в Telegram или MAX. Отвечаю лично и говорю прямо, где риск и что с ним делать.</p>
+      <form class="lead" id="zayavka" novalidate>
+        <fieldset>
+          <legend>Ваша задача</legend>
+          <div class="chips">
+            <label><input type="radio" name="task" value="Продаю" checked><span>Продаю</span></label>
+            <label><input type="radio" name="task" value="Покупаю"><span>Покупаю</span></label>
+            <label><input type="radio" name="task" value="Бесплатная оценка"><span>Оценка квартиры</span></label>
+            <label><input type="radio" name="task" value="Продаю и покупаю"><span>Продаю и покупаю</span></label>
+            <label><input type="radio" name="task" value="Новостройка"><span>Новостройка</span></label>
+          </div>
+        </fieldset>
+        <label class="f"><span>Имя</span><input type="text" name="name" autocomplete="name" placeholder="Как к вам обращаться"></label>
+        <label class="f"><span>Телефон</span><input type="tel" name="phone" autocomplete="tel" inputmode="tel" placeholder="+7 900 000-00-00" required></label>
+        <label class="f"><span>Коротко о квартире <i style="font-style:normal;opacity:.7">— необязательно</i></span><textarea name="note" placeholder="Район, комнаты, сроки"></textarea></label>
+        <div class="send">
+          <button type="button" class="btn" data-via="tg">Отправить в Telegram</button>
+          <button type="button" class="btn ghost" data-via="max">Отправить в MAX</button>
+        </div>
+        <p class="ok" id="leadOk" role="status"></p>
+        <p class="hint">Нажимая кнопку, вы соглашаетесь на обработку указанных данных для ответа на заявку.</p>
+      </form>
     </div>
     <div class="channels">
       <a class="main" href="https://t.me/schmidt_invest" target="_blank" rel="noopener">Написать Юргену <span>Telegram</span></a>
@@ -684,6 +754,45 @@ function tgLink(msg){ return "https://t.me/" + TG + "?text=" + encodeURIComponen
 
 /* Кнопки Telegram с готовым текстом */
 [].forEach.call(document.querySelectorAll(".js-tg"), function(a){ a.href = tgLink(a.getAttribute("data-msg")); });
+
+/* Заявка: Telegram с готовым текстом, MAX — текст копируется */
+var MAX_URL = "https://max.ru/u/f9LHodD0cOLXSIVONJ4Ek4Ah1Q2KmL9OW2Ei-KE0Honw4wcypHIvq56i1jg";
+var form = document.getElementById("zayavka");
+function setTask(v){ [].forEach.call(form.querySelectorAll('input[name=task]'), function(r){ r.checked = (r.value === v); }); }
+[].forEach.call(document.querySelectorAll(".js-task"), function(a){ a.addEventListener("click", function(){ setTask(a.getAttribute("data-task")); }); });
+function leadText(){
+  var f = form.elements, t = (form.querySelector('input[name=task]:checked')||{}).value || "";
+  var lines = ["Заявка с сайта schmidtcapital.ru", "Задача: " + t];
+  if (f.name.value.trim()) lines.push("Имя: " + f.name.value.trim());
+  lines.push("Телефон: " + f.phone.value.trim());
+  if (f.note.value.trim()) lines.push("О квартире: " + f.note.value.trim());
+  return lines.join("\n");
+}
+function copyText(txt){
+  if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(txt).catch(function(){});
+  var ta = document.createElement("textarea"); ta.value = txt; ta.style.position = "fixed"; ta.style.opacity = "0";
+  document.body.appendChild(ta); ta.select(); try { document.execCommand("copy"); } catch(_){} document.body.removeChild(ta);
+  return Promise.resolve();
+}
+[].forEach.call(form.querySelectorAll("[data-via]"), function(b){
+  b.addEventListener("click", function(){
+    var ph = form.elements.phone, ok = document.getElementById("leadOk");
+    if (ph.value.replace(/\D/g,"").length < 10){ ph.classList.add("err"); ph.focus(); ok.textContent = "Укажите телефон — так я смогу перезвонить."; ok.classList.add("show"); return; }
+    ph.classList.remove("err");
+    var txt = leadText(), via = b.getAttribute("data-via");
+    try { if (window.ym) ym(112744291, "reachGoal", via === "tg" ? "lead_form_tg" : "lead_form_max"); } catch(_){}
+    if (via === "tg"){
+      window.open(tgLink(txt), "_blank", "noopener");
+      ok.textContent = "Открываю Telegram — заявка уже вписана в сообщение, осталось нажать «Отправить».";
+    } else {
+      var w = window.open("about:blank", "_blank");
+      copyText(txt).then(function(){ if (w) w.location = MAX_URL; else location.href = MAX_URL; });
+      ok.textContent = "Текст заявки скопирован. В открывшемся чате MAX вставьте его и нажмите «Отправить».";
+    }
+    ok.classList.add("show");
+  });
+});
+form.elements.phone.addEventListener("input", function(){ this.classList.remove("err"); });
 
 var mb = document.getElementById("menuBtn"), nav = document.getElementById("nav");
 function setMenu(o){ nav.classList.toggle("open", o); mb.setAttribute("aria-expanded", o); mb.textContent = o ? "Закрыть" : "Меню"; }
