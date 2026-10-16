@@ -691,7 +691,7 @@ footer b{color:var(--brass);font-family:var(--serif);font-size:22px;font-weight:
 
 <section id="books">
   <style>
-    .books-grid{display:grid;grid-template-columns:1fr 1fr;gap:28px;margin-top:40px}
+    .books-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:28px;margin-top:40px}
     .book{display:flex;flex-direction:column;border:1px solid var(--line);border-top:2px solid var(--brass);padding:28px;background:var(--g2)}
     .book .cover{aspect-ratio:3/4;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:20px;margin-bottom:22px;border:1px solid var(--line)}
     .book .cover.dark{background:linear-gradient(160deg,#2a2e33,#121416);color:var(--ink)}
@@ -703,6 +703,7 @@ footer b{color:var(--brass);font-family:var(--serif);font-size:22px;font-weight:
     .book p{color:var(--muted);margin:0 0 22px;flex:1}
     .book .btn{background:#f3efe6;color:#121416;border-color:#f3efe6;align-self:flex-start}
     .book .btn:hover{background:#ffffff;border-color:#ffffff}
+    @media (max-width:960px){.books-grid{grid-template-columns:1fr 1fr}}
     @media (max-width:700px){.books-grid{grid-template-columns:1fr}}
   </style>
   <div class="wrap">
@@ -728,6 +729,16 @@ footer b{color:var(--brass);font-family:var(--serif);font-size:22px;font-weight:
         <h3>Квадратные метры чужой страны</h3>
         <p>Истории из практики риэлтора: сделки, клиенты и Москва глазами человека, который начинал с нуля.</p>
         <a class="btn" href="https://t.me/schmidt_invest?text=%D0%9A%D0%B2%D0%B0%D0%B4%D1%80%D0%B0%D1%82%D0%BD%D1%8B%D0%B5%20%D0%BC%D0%B5%D1%82%D1%80%D1%8B" target="_blank" rel="noopener">Получить книгу</a>
+      </article>
+      <article class="book">
+        <div class="cover light">
+          <small>ЮРГЕН ШМИДТ</small>
+          <div class="t">МЕЖДУ ДВУХ ОГНЕЙ</div>
+          <div class="s">роман о бизнесе, доверии и выборе между двумя мирами</div>
+        </div>
+        <h3>Между двух огней</h3>
+        <p>Роман о бизнесе, доверии и выборе между двумя мирами. Полный текст отправлю в Telegram.</p>
+        <a class="btn" href="https://t.me/schmidt_invest?text=%D0%9C%D0%B5%D0%B6%D0%B4%D1%83%20%D0%B4%D0%B2%D1%83%D1%85%20%D0%BE%D0%B3%D0%BD%D0%B5%D0%B9" target="_blank" rel="noopener">Получить книгу</a>
       </article>
     </div>
   </div>
